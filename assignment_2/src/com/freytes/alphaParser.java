@@ -16,7 +16,7 @@ class alphaParser {
      */
 
          //Declare Variables from Main Class
-        private Main mainVar = new Main();
+         private Main mainVar = new Main();
 
         //Declaring sendName method
         private Main sendName = new Main();

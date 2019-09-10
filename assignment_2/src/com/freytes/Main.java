@@ -20,13 +20,11 @@ public class Main {
 		callClass.reportPrint();
 	}
 
-	public String printName(String receivedName){
+	void printName(String receivedName){
 		System.out.println(receivedName);
-		return receivedName;
 	}
-	public int printReport(String receivedReport){
+	void printReport(String receivedReport){
 		System.out.println(receivedReport);
-		return 0;
 	}
 
 }
