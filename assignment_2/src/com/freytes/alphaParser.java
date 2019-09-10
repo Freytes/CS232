@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class alphaParser {
+class alphaParser {
 
     /* To-do:
      * - Add message for blank values in firstname and lastname *done
@@ -15,103 +15,106 @@ public class alphaParser {
      *
      */
 
-    //Declare Variables from Main Class
-    private Main mainVar = new Main();
-
-    public void alphaParser() {
+         //Declare Variables from Main Class
+        private Main mainVar = new Main();
 
         //Declaring sendName method
-        Main sendName = new Main();
+        private Main sendName = new Main();
 
         //Declaring sendReport method
-        Main sendReport = new Main();
+        private Main sendReport = new Main();
 
         //Scanner Object to read the text
-        Scanner keyword = new Scanner(System.in);
+        private Scanner keyword = new Scanner(System.in);
 
         //Begin Name
-        do {
-            //User Input First Name
-            System.out.println("Please Enter your First Name:");
+        void firstName() {
+            do {
+                //User Input First Name
+                System.out.println("Please Enter your First Name:");
+                mainVar.fn1 = keyword.nextLine();
 
-            mainVar.fn1 = keyword.nextLine();
+                if (!((mainVar.fn1 == null) || "".equals(mainVar.fn1.trim()) || mainVar.fn1.matches(("\\d+")))) {
+                    mainVar.fn1 = mainVar.fn1.replaceAll("[^a-zA-Z]", "");
+                    sendName.printName(mainVar.fn1);
+                    mainVar.errormsg = false;
+                } else {
+                    System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                    mainVar.errormsg = true;
+                }
 
-            if (!((mainVar.fn1 == null) || "".equals(mainVar.fn1.trim()) || mainVar.fn1.matches(("\\d+")))) {
-                mainVar.fn1 = mainVar.fn1.replaceAll("[^a-zA-Z]", "");
-                sendName.printName(mainVar.fn1);
-                mainVar.errormsg = false;
-            } else {
-                System.out.println("Invalid Input, please enter alphabetic values only.\n");
-                mainVar.errormsg = true;
-            }
-
-        } while (mainVar.errormsg);
-        
-
-        //Begin Last Name
-
-        do {
-            //User Input Last Name
-            System.out.println("Please Enter your Last Name: (Once done please type exit)");
+            } while (mainVar.errormsg);
+        }
 
 
-            mainVar.ln1 = keyword.nextLine();
+        void lastName() {
+            //Begin Last Name
+            do {
+                //User Input Last Name
+                System.out.println("Please Enter your Last Name: (Once done please type exit)");
+                mainVar.ln1 = keyword.nextLine();
 
-            if (!((mainVar.ln1 == null) || "".equals(mainVar.ln1.trim()) || mainVar.ln1.matches(("\\d+")))) {
-                mainVar.ln1 = mainVar.ln1.replaceAll("[^a-zA-Z]", "");
-                sendName.printName(mainVar.ln1);
-                mainVar.errormsg = false;
-            } else {
-                System.out.println("Invalid Input, please enter alphabetic values only.\n");
-                mainVar.errormsg = true;
-            }
+                if (!((mainVar.ln1 == null) || "".equals(mainVar.ln1.trim()) || mainVar.ln1.matches(("\\d+")))) {
+                    mainVar.ln1 = mainVar.ln1.replaceAll("[^a-zA-Z]", "");
+                    sendName.printName(mainVar.ln1);
+                    mainVar.errormsg = false;
+                } else {
+                    System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                    mainVar.errormsg = true;
+                }
 
-        } while (mainVar.errormsg);
-        //End Last Name
+            } while (mainVar.errormsg);
+            //End Last Name
+        }
 
-        //Begin Report Name
-        do {
+        void reportName() {
+            //Begin Report Name
+            do {
 
-            System.out.println("Please Enter your Report Name:");
+                System.out.println("Please Enter your Report Name:");
 
-            mainVar.rname = keyword.nextLine();
+                mainVar.rname = keyword.nextLine();
 
-            if (!((mainVar.rname == null) || "".equals(mainVar.rname.trim()))) {
+                if (!((mainVar.rname == null) || "".equals(mainVar.rname.trim()))) {
 
-                sendReport.printReport(mainVar.rname);
-                mainVar.errormsg = false;
-            } else {
-                System.out.println("Invalid Input, please enter a value.\n");
-                mainVar.errormsg = true;
-            }
-        } while (mainVar.errormsg);
+                    sendReport.printReport(mainVar.rname);
+                    mainVar.errormsg = false;
+                } else {
+                    System.out.println("Invalid Input, please enter a value.\n");
+                    mainVar.errormsg = true;
+                }
+            } while (mainVar.errormsg);
+        }
         //End Report Name
 
-        // Do/While Loop which checks for invalid characters and captures all integer values
-        do {
-            try {
-                for (int i = 0; i < mainVar.finNumbervar; i++) {
+        void collectNumbers() {
+            // Do/While Loop which checks for invalid characters and captures all integer values
+            do {
+                try {
+                    for (int i = 0; i < mainVar.finNumbervar; i++) {
 
-                    //User Input number
-                    System.out.print("Enter integer : \n");
+                        //User Input number
+                        System.out.print("Enter integer : \n");
 
-                    // create scanner object for numerical values
-                    Scanner numScanner = new Scanner(System.in);
+                        // create scanner object for numerical values
+                        Scanner numScanner = new Scanner(System.in);
 
-                    //Add Values to Array
-                    mainVar.n1[i] = numScanner.nextInt();
+                        //Add Values to Array
+                        mainVar.n1[i] = numScanner.nextInt();
 
-                    mainVar.errormsg = false;
+                        mainVar.errormsg = false;
+                    }
+                } catch (InputMismatchException e) {
+
+                    // accept integer only.
+                    System.out.println("Invalid Input, please enter numerical values only.\n");
+
+                    mainVar.errormsg = true;
                 }
-            } catch (InputMismatchException e) {
+            } while (mainVar.errormsg);
+        }
 
-                // accept integer only.
-                System.out.println("Invalid Input, please enter numerical values only.\n");
-
-                mainVar.errormsg = true;
-            }
-        } while (mainVar.errormsg);
-
+        void reportPrint(){
         // Calculate Array Values
 
         int n1_added = mainVar.n1[0] + mainVar.n1[1] + mainVar.n1[2] + mainVar.n1[3] + mainVar.n1[4] + mainVar.n1[5] + mainVar.n1[6];
@@ -142,6 +145,6 @@ public class alphaParser {
         System.out.println("------------------------------------------------");
 
         //End Report Name
-
+        return;
     }
 }
