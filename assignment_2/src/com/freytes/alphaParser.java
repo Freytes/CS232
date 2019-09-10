@@ -27,6 +27,8 @@ class alphaParser {
         //Scanner Object to read the text
         private Scanner keyword = new Scanner(System.in);
 
+        private Scanner lastNameScanner = new Scanner (System.in);
+
         //Begin Name
         void firstName() {
             do {
@@ -46,25 +48,24 @@ class alphaParser {
             } while (mainVar.errormsg);
         }
 
+    void lastName() {
+        //Begin Last Name
+        do {
+            //User Input Last Name
+            System.out.println("Please Enter your Last Name: (Once done please type exit)");
+            mainVar.ln1 = keyword.nextLine();
 
-        void lastName() {
-            //Begin Last Name
-            do {
-                //User Input Last Name
-                System.out.println("Please Enter your Last Name: (Once done please type exit)");
-                mainVar.ln1 = keyword.nextLine();
+            if (!((mainVar.ln1 == null) || "".equals(mainVar.ln1.trim()) || mainVar.ln1.matches(("\\d+")))) {
+                mainVar.ln1 = mainVar.ln1.replaceAll("[^a-zA-Z]", "");
+                sendName.printName(mainVar.ln1);
+                mainVar.errormsg = false;
+            } else {
+                System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                mainVar.errormsg = true;
+            }
 
-                if (!((mainVar.ln1 == null) || "".equals(mainVar.ln1.trim()) || mainVar.ln1.matches(("\\d+")))) {
-                    mainVar.ln1 = mainVar.ln1.replaceAll("[^a-zA-Z]", "");
-                    sendName.printName(mainVar.ln1);
-                    mainVar.errormsg = false;
-                } else {
-                    System.out.println("Invalid Input, please enter alphabetic values only.\n");
-                    mainVar.errormsg = true;
-                }
-
-            } while (mainVar.errormsg);
-            //End Last Name
+        } while (mainVar.errormsg);
+        //End Last Name
         }
 
         void reportName() {
