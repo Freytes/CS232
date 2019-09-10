@@ -1,2 +1,2 @@
-"# CS232" 
-"# CS232" 
+Boston University
+CS232 - Programming with Java
