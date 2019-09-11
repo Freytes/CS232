@@ -13,7 +13,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		//Calling alphaParser Class
-		alphaParser callClass = new alphaParser();
+		userInput callClass = new userInput();
 		callClass.firstName();
 		callClass.lastName();
 		callClass.reportName();
