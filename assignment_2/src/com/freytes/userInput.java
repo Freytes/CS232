@@ -70,6 +70,7 @@ class userInput {
 
             } else {
                 System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                System.out.println("Thanks");
 
             }
         }
