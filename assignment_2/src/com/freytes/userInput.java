@@ -54,11 +54,14 @@ class userInput {
 
             ln1 = ln_input.toString();
 
-            if (ln1.contains("#") || ln_input == 50) {
-                ln1 = new String(ln1_temporary);
-                ln1 = ln1.trim();
-                System.out.println("Last Name:" + ln1);
-                return ln1;
+            switch (ln1) {
+                case "#":
+                    if (ln1.contains("#") || ln_input == 50) {
+                    ln1 = new String(ln1_temporary);
+                    ln1 = ln1.trim();
+                    System.out.println("Last Name:" + ln1);
+                    return ln1;
+                    }
             }
 
             if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
@@ -73,7 +76,7 @@ class userInput {
     }
     //End Last Name
 
-    String reportName() {
+   String reportName() {
         //Begin Report Name
         do {
 
