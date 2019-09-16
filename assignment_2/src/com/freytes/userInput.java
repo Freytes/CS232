@@ -1,4 +1,5 @@
 package com.freytes;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -57,27 +58,24 @@ class userInput {
             switch (ln1) {
                 case "#":
                     if (ln1.contains("#") || ln_input == 50) {
-                    ln1 = new String(ln1_temporary);
-                    ln1 = ln1.trim();
-                    System.out.println("Last Name:" + ln1);
-                    return ln1;
+                        ln1 = new String(ln1_temporary);
+                        ln1 = ln1.trim();
+                        System.out.println("Last Name:" + ln1);
+                        return ln1;
                     }
             }
-
             if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
                 ln1 = ln1.replaceAll("[^a-zA-Z]", "");
                 ln1_temporary[ln_index++] = ln_input;
 
             } else {
                 System.out.println("Invalid Input, please enter alphabetic values only.\n");
-                System.out.println("Thanks");
-
             }
         }
     }
     //End Last Name
 
-   String reportName() {
+    String reportName() {
         //Begin Report Name
         do {
 
@@ -85,6 +83,7 @@ class userInput {
 
             rname = keyword.nextLine();
 
+            //Ensuring that there are no whitespaces or null values
             if (!((rname == null) || "".equals(rname.trim()))) {
 
                 sendReport.printReport(rname);
@@ -106,6 +105,7 @@ class userInput {
 
                     //User Input number
                     System.out.print("Please Enter only Numerical Values : \n");
+
                     // create scanner object for numerical values
                     Scanner numScanner = new Scanner(System.in);
 
