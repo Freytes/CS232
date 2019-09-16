@@ -97,11 +97,14 @@ class userInput {
     }
     //End Report Name
 
-    String collectNumbers() {
+    void collectNumbers() {
         // Do/While Loop which checks for invalid characters and captures all integer values
-        do {
-            try {
-                for (int i = 0; i < finNumbervar; i++) {
+
+        for (int i = 0; i < finNumbervar; i++) {
+
+            do {
+
+                try {
 
                     //User Input number
                     System.out.print("Please Enter only Numerical Values : \n");
@@ -113,19 +116,19 @@ class userInput {
                     n1[i] = numScanner.nextInt();
 
                     errormsg = false;
+
+                } catch (InputMismatchException e) {
+
+                    // accept integer only.
+                    System.out.println("Invalid Input, please enter numerical values only.\n");
+
+                    errormsg = true;
                 }
-            } catch (InputMismatchException e) {
 
-                // accept integer only.
-                System.out.println("Invalid Input, please enter numerical values only.\n");
-
-                errormsg = true;
-            }
-
-        } while (errormsg);
-
-        return String.valueOf(n1);
+            } while (errormsg);
+        }
     }
+
 
     void reportPrint() {
         // Calculate Array Values
