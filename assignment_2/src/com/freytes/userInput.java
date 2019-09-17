@@ -32,12 +32,12 @@ class userInput {
             System.out.println("Please Enter your First Name:");
             fn1 = keyword.nextLine();
 
-            if (!((fn1 == null) || "".equals(fn1.trim()) || fn1.matches(("\\d+")))) {
+            if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
                 fn1 = fn1.replaceAll("[^a-zA-Z]", "");
                 sendName.printName(fn1);
                 errormsg = false;
             } else {
-                System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                System.out.println("Invalid Input, please enter letters only.\n");
                 errormsg = true;
             }
 
@@ -69,7 +69,7 @@ class userInput {
                 ln1_temporary[ln_index++] = ln_input;
 
             } else {
-                System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                System.out.println("Invalid Input, please enter letters only.\n");
             }
         }
     }
@@ -89,7 +89,7 @@ class userInput {
                 sendReport.printReport(rname);
                 errormsg = false;
             } else {
-                System.out.println("Invalid Input, please enter a value.\n");
+                System.out.println("Invalid Input, please enter a value cannot be NULL or blank.\n");
                 errormsg = true;
             }
         } while (errormsg);
@@ -99,6 +99,10 @@ class userInput {
 
     void collectNumbers() {
         // Do/While Loop which checks for invalid characters and captures all integer values
+
+        //Instructions
+        System.out.print("\n In this portion of the report please enter numerical values. \n");
+        System.out.print("You will be asked for values seven times! \n");
 
         for (int i = 0; i < finNumbervar; i++) {
 

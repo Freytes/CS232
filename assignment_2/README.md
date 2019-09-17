@@ -1,4 +1,4 @@
-#Reporting Application
+# Reporting Application
 - The purpose of creating this program was to take user input and build or compile the input into a visible report.
 
 # Application Features
