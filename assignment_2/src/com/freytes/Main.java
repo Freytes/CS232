@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         //Calling alphaParser Class
         userInput callClass = new userInput();
+        callClass.instructions();
         callClass.firstName();
         callClass.lastName();
         callClass.reportName();

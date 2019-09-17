@@ -25,19 +25,26 @@ class userInput {
     //Scanner Object to read the text
     private Scanner keyword = new Scanner(System.in);
 
-    //Begin Name
+    void instructions(){
+        System.out.println("Welcome to the Report Application \n");
+
+        System.out.println("Please follow the instructions provided at each step. \n");
+
+        return;
+    }
+
     String firstName() {
         do {
             //User Input First Name
             System.out.println("Please Enter your First Name:");
             fn1 = keyword.nextLine();
 
-            if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
+            if (!((fn1 == null) || "".equals(fn1.trim()) || fn1.matches(("\\d+")))) {
                 fn1 = fn1.replaceAll("[^a-zA-Z]", "");
                 sendName.printName(fn1);
                 errormsg = false;
             } else {
-                System.out.println("Invalid Input, please enter letters only.\n");
+                System.out.println("Invalid Input, please enter alphabetic values only.\n");
                 errormsg = true;
             }
 
@@ -49,7 +56,7 @@ class userInput {
         //Begin Last Name
         while (true) {
             //User Input Last Name
-            System.out.println("Please Enter your Last Name, on character at a time (Once done please type #):");
+            System.out.println("Please Enter your Last Name, on character at a time [Once done please type #]:");
 
             Character ln_input = keyword.nextLine().charAt(0);
 
