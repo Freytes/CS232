@@ -1,5 +1,5 @@
 #Reporting Application
-The purpose of creating this program was to take user input and build or compile the input into a visible report.
+- The purpose of creating this program was to take user input and build or compile the input into a visible report.
 
 # Application Features
 - Allows user to enter a First Name value and strips out all non Alphabetic characters.
@@ -12,7 +12,7 @@ The purpose of creating this program was to take user input and build or compile
      - Numbers.
      - NULL values.
 
-# Programs Files
+# Program Files
   **Main.java**
    - This is where the Main method and all the static variables reside.
    
