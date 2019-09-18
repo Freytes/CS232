@@ -17,10 +17,11 @@
    - This is where the Main method and all the static variables reside.
    
   **userInput.java**
-   - Examples
-
-  **inputVerification.java**
-   - Examples
+   - Evaluates the following input:
+     - First Name.
+     - Last Name.
+     - Report Name.
+   - The report is also generated and displayed to the user with all entered values.
    
 # Known Issues
   **First Name:**
@@ -28,6 +29,27 @@
   
   **Report Name:**
    - Any input over fifty character long will cause the Report Name to become no-longer valid.
-   
+
+## Pseudo Code 
+
+1. Main()
+    - Display the values of : First Name, Last Name, Report Name and Generate the entire report from the items entered.
+2. userInput()
+   - Ask the end user for the following information:
+     - First Name
+     - Last Name
+     - Report Name
+   - When entering the First Name, Last Name the following checks occur:
+     - Clear out NULL values and alert the user.
+     - Trim white spaces and alert the user.
+     - Alert the user if numeric value is entered.
+   - Get Numbers method is limited to seven input values.
+   - Generate the Report.
+     - Mathematics operations are performed against the user input:
+       - Average
+       - Max
+       - Min
+       - Divide
+       - Addition  
 ## UML
 ![UML](assignment2UML.png)
