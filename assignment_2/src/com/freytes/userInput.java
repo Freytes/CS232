@@ -30,8 +30,19 @@ class userInput {
 
         System.out.println("Please follow the instructions provided at each step. \n");
 
+        System.out.println("If you want to exit the ENTIRE program please enter:  ! \n");
+
         return;
     }
+    // Exits the entire program
+     boolean exitProgram(){
+        switch (keyword.findInLine("!")){
+         case "!" :
+           System.out.println("EXITING PROGRAM \n");
+            System.exit(0);
+        }
+         return false;
+     }
 
     String firstName() {
         do {
@@ -43,7 +54,7 @@ class userInput {
                 fn1 = fn1.replaceAll("[^a-zA-Z]", "");
                 sendName.printName(fn1);
                 errormsg = false;
-            } else {
+        } else {
                 System.out.println("Invalid Input, please enter alphabetic values only.\n");
                 errormsg = true;
             }
@@ -159,7 +170,7 @@ class userInput {
 
         System.out.println("------------------------------------------------");
 
-        System.out.println("|\tLowest Value: \t|\t" + n1_min + "\t");
+        System.out.println("|\tLowest Value: \t\t" + n1_min + "\t");
 
         System.out.println("------------------------------------------------");
 

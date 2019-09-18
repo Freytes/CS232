@@ -11,6 +11,7 @@ public class Main {
         callClass.reportName();
         callClass.collectNumbers();
         callClass.reportPrint();
+        callClass.exitProgram();
     }
 
     // Methods for receiving input values
