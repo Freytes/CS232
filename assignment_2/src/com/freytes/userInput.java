@@ -12,7 +12,6 @@ class userInput {
     private String ln1;
     private char[] ln1_temporary = new char[50];
     private int ln_index = 0;
-    private String ln1_exit;
     private String rname;
     private int[] n1 = new int[7];
     private int finNumbervar = 7;
@@ -43,25 +42,28 @@ class userInput {
             case "-1":
                 System.out.println("EXITING PROGRAM \n");
                 System.exit(0);
+                return false;
 
         }
         switch (ln1) {
             case "-1":
                 System.out.println("EXITING PROGRAM \n");
                 System.exit(0);
+                return false;
 
         }
         switch (rname) {
             case "-1":
                 System.out.println("EXITING PROGRAM \n");
                 System.exit(0);
-
+                return false;
         }
 
         return Boolean.valueOf(String.valueOf(this));
     }
 
     String firstName() {
+
         do {
             //User Input First Name
             System.out.println("Please Enter your First Name:");
@@ -93,9 +95,9 @@ class userInput {
         return fn1;
     }
 
-    String lastName() {
+    //Begin Last Name
 
-        //Begin Last Name
+    String lastName() {
 
         while (true) {
 
@@ -131,8 +133,6 @@ class userInput {
             }
         }
     }
-
-
     //End Last Name
 
     String reportName() {
