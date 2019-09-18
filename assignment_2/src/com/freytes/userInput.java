@@ -35,6 +35,7 @@ class userInput {
         return;
     }
     // Exits the entire program
+    // Added Exit Program
      boolean exitProgram(){
         switch (keyword.findInLine("!")){
          case "!" :
