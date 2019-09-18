@@ -1,5 +1,6 @@
 package com.freytes;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -11,6 +12,7 @@ class userInput {
     private String ln1;
     private char[] ln1_temporary = new char[50];
     private int ln_index = 0;
+    private String ln1_exit;
     private String rname;
     private int[] n1 = new int[7];
     private int finNumbervar = 7;
@@ -25,93 +27,147 @@ class userInput {
     //Scanner Object to read the text
     private Scanner keyword = new Scanner(System.in);
 
-    void instructions(){
+    void instructions() {
         System.out.println("Welcome to the Report Application \n");
 
         System.out.println("Please follow the instructions provided at each step. \n");
 
-        System.out.println("If you want to exit the ENTIRE program please enter:  ! \n");
+        System.out.println("If you want to exit the ENTIRE program please enter:  -1 \n");
 
         return;
     }
+
     // Exits the entire program
-    // Added Exit Program
-     boolean exitProgram(){
-        switch (keyword.findInLine("!")){
-         case "!" :
-           System.out.println("EXITING PROGRAM \n");
-            System.exit(0);
+    Boolean exitProgram() {
+        switch (fn1) {
+            case "-1":
+                System.out.println("EXITING PROGRAM \n");
+                System.exit(0);
+
         }
-         return false;
-     }
+        switch (ln1) {
+            case "-1":
+                System.out.println("EXITING PROGRAM \n");
+                System.exit(0);
+
+        }
+        switch (rname) {
+            case "-1":
+                System.out.println("EXITING PROGRAM \n");
+                System.exit(0);
+
+        }
+
+        return Boolean.valueOf(String.valueOf(this));
+    }
 
     String firstName() {
         do {
             //User Input First Name
             System.out.println("Please Enter your First Name:");
+
             fn1 = keyword.nextLine();
 
+            // Checks first for escape condition of "-1" to exit program
+            if (fn1.contains("-1")) {
+                exitProgram();
+            }
+
             if (!((fn1 == null) || "".equals(fn1.trim()) || fn1.matches(("\\d+")))) {
+
                 fn1 = fn1.replaceAll("[^a-zA-Z]", "");
+
                 sendName.printName(fn1);
+
                 errormsg = false;
-        } else {
+
+            } else {
+
                 System.out.println("Invalid Input, please enter alphabetic values only.\n");
+
                 errormsg = true;
             }
 
         } while (errormsg);
+
         return fn1;
     }
 
     String lastName() {
+
         //Begin Last Name
+
         while (true) {
+
             //User Input Last Name
+
             System.out.println("Please Enter your Last Name, on character at a time [Once done please type #]:");
 
             Character ln_input = keyword.nextLine().charAt(0);
-
             ln1 = ln_input.toString();
 
             switch (ln1) {
                 case "#":
                     if (ln1.contains("#") || ln_input == 50) {
+
                         ln1 = new String(ln1_temporary);
                         ln1 = ln1.trim();
                         System.out.println("Last Name:" + ln1);
                         return ln1;
                     }
+                case "-1":
+                    exitProgram();
             }
+
             if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
+
                 ln1 = ln1.replaceAll("[^a-zA-Z]", "");
                 ln1_temporary[ln_index++] = ln_input;
 
             } else {
+
                 System.out.println("Invalid Input, please enter letters only.\n");
+                errormsg = true;
             }
         }
     }
+
+
     //End Last Name
 
     String reportName() {
+
         //Begin Report Name
+
         do {
 
             System.out.println("Please Enter your Report Name:");
 
             rname = keyword.nextLine();
 
+            // Checks first for escape condition of "-1" to exit program
+
+            if (rname.contains("-1")) {
+
+                exitProgram();
+            }
+
             //Ensuring that there are no whitespaces or null values
             if (!((rname == null) || "".equals(rname.trim()))) {
 
                 sendReport.printReport(rname);
+
                 errormsg = false;
+
             } else {
                 System.out.println("Invalid Input, please enter a value cannot be NULL or blank.\n");
+
                 errormsg = true;
+
             }
+
         } while (errormsg);
+
         return rname;
     }
     //End Report Name
@@ -120,13 +176,15 @@ class userInput {
         // Do/While Loop which checks for invalid characters and captures all integer values
 
         //Instructions
-        System.out.print("\n In this portion of the report please enter numerical values. \n");
+        System.out.print("In this portion of the report please enter numerical values. \n");
+
         System.out.print("You will be asked for values seven times! \n");
+
+        System.out.print("If you want to exit the ENTIRE program please enter:  -1 \n");
 
         for (int i = 0; i < finNumbervar; i++) {
 
             do {
-
                 try {
 
                     //User Input number
@@ -138,6 +196,14 @@ class userInput {
                     //Add Values to Array
                     n1[i] = numScanner.nextInt();
 
+                    // Checks first for escape condition of "-1" to exit program
+                    if (Arrays.toString(n1).contains("-1")) {
+
+                        System.out.println("EXITING PROGRAM \n");
+
+                        System.exit(0);
+                    }
+
                     errormsg = false;
 
                 } catch (InputMismatchException e) {
@@ -147,11 +213,9 @@ class userInput {
 
                     errormsg = true;
                 }
-
             } while (errormsg);
         }
     }
-
 
     void reportPrint() {
         // Calculate Array Values
