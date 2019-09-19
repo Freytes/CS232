@@ -95,6 +95,7 @@ class userInput {
         return fn1;
     }
 
+
     //Begin Last Name
 
     String lastName() {
@@ -104,6 +105,7 @@ class userInput {
             //User Input Last Name
 
             System.out.println("Please Enter your Last Name, on character at a time [Once done please type #]:");
+
 
             Character ln_input = keyword.nextLine().charAt(0);
             ln1 = ln_input.toString();
@@ -117,8 +119,11 @@ class userInput {
                         System.out.println("Last Name:" + ln1);
                         return ln1;
                     }
-                case "-1":
-                    exitProgram();
+            }
+
+            if (ln1.contains("-1")) {
+
+                exitProgram();
             }
 
             if (!((ln1 == null) || "".equals(ln1.trim()) || ln1.matches(("\\d+")))) {
