@@ -27,6 +27,7 @@ class userInput {
     private Scanner keyword = new Scanner(System.in);
 
     void instructions() {
+
         System.out.println("Welcome to the Report Application \n");
 
         System.out.println("Please follow the instructions provided at each step. \n");
@@ -34,6 +35,7 @@ class userInput {
         System.out.println("If you want to exit the ENTIRE program please enter:  -1 \n");
 
         return;
+
     }
 
     // Exits the entire program
@@ -62,38 +64,38 @@ class userInput {
         return Boolean.valueOf(String.valueOf(this));
     }
 
-    String firstName() {
+        String firstName () {
 
-        do {
-            //User Input First Name
-            System.out.println("Please Enter your First Name:");
+            do {
+                //User Input First Name
+                System.out.println("Please Enter your First Name:");
 
-            fn1 = keyword.nextLine();
+                fn1 = keyword.nextLine();
 
-            // Checks first for escape condition of "-1" to exit program
-            if (fn1.contains("-1")) {
-                exitProgram();
-            }
+                // Checks first for escape condition of "-1" to exit program
+                if (fn1.contains("-1")) {
+                    exitProgram();
+                }
 
-            if (!((fn1 == null) || "".equals(fn1.trim()) || fn1.matches(("\\d+")))) {
+                if (!((fn1 == null) || "".equals(fn1.trim()) || fn1.matches(("\\d+")))) {
 
-                fn1 = fn1.replaceAll("[^a-zA-Z]", "");
+                    fn1 = fn1.replaceAll("[^a-zA-Z]", "");
 
-                sendName.printName(fn1);
+                    sendName.printName(fn1);
 
-                errormsg = false;
+                    errormsg = false;
 
-            } else {
+                } else {
 
-                System.out.println("Invalid Input, please enter alphabetic values only.\n");
+                    System.out.println("Invalid Input, please enter alphabetic values only.\n");
 
-                errormsg = true;
-            }
+                    errormsg = true;
+                }
 
-        } while (errormsg);
+            } while (errormsg);
 
-        return fn1;
-    }
+            return fn1;
+        }
 
 
     //Begin Last Name
@@ -140,119 +142,119 @@ class userInput {
     }
     //End Last Name
 
-    String reportName() {
+        String reportName () {
 
-        //Begin Report Name
-
-        do {
-
-            System.out.println("Please Enter your Report Name:");
-
-            rname = keyword.nextLine();
-
-            // Checks first for escape condition of "-1" to exit program
-
-            if (rname.contains("-1")) {
-
-                exitProgram();
-            }
-
-            //Ensuring that there are no whitespaces or null values
-            if (!((rname == null) || "".equals(rname.trim()))) {
-
-                sendReport.printReport(rname);
-
-                errormsg = false;
-
-            } else {
-                System.out.println("Invalid Input, please enter a value cannot be NULL or blank.\n");
-
-                errormsg = true;
-
-            }
-
-        } while (errormsg);
-
-        return rname;
-    }
-    //End Report Name
-
-    void collectNumbers() {
-        // Do/While Loop which checks for invalid characters and captures all integer values
-
-        //Instructions
-        System.out.print("In this portion of the report please enter numerical values. \n");
-
-        System.out.print("You will be asked for values seven times! \n");
-
-        System.out.print("If you want to exit the ENTIRE program please enter:  -1 \n");
-
-        for (int i = 0; i < finNumbervar; i++) {
+            //Begin Report Name
 
             do {
-                try {
 
-                    //User Input number
-                    System.out.print("Please Enter only Numerical Values : \n");
+                System.out.println("Please Enter your Report Name:");
 
-                    // create scanner object for numerical values
-                    Scanner numScanner = new Scanner(System.in);
+                rname = keyword.nextLine();
 
-                    //Add Values to Array
-                    n1[i] = numScanner.nextInt();
+                // Checks first for escape condition of "-1" to exit program
 
-                    // Checks first for escape condition of "-1" to exit program
-                    if (Arrays.toString(n1).contains("-1")) {
+                if (rname.contains("-1")) {
 
-                        System.out.println("EXITING PROGRAM \n");
+                    exitProgram();
+                }
 
-                        System.exit(0);
-                    }
+                //Ensuring that there are no whitespaces or null values
+                if (!((rname == null) || "".equals(rname.trim()))) {
+
+                    sendReport.printReport(rname);
 
                     errormsg = false;
 
-                } catch (InputMismatchException e) {
-
-                    // accept integer only.
-                    System.out.println("Invalid Input, please enter numerical values only.\n");
+                } else {
+                    System.out.println("Invalid Input, please enter a value cannot be NULL or blank.\n");
 
                     errormsg = true;
+
                 }
+
             } while (errormsg);
+
+            return rname;
+        }
+        //End Report Name
+
+        void collectNumbers () {
+            // Do/While Loop which checks for invalid characters and captures all integer values
+
+            //Instructions
+            System.out.print("In this portion of the report please enter numerical values. \n");
+
+            System.out.print("You will be asked for values seven times! \n");
+
+            System.out.print("If you want to exit the ENTIRE program please enter:  -1 \n");
+
+            for (int i = 0; i < finNumbervar; i++) {
+
+                do {
+                    try {
+
+                        //User Input number
+                        System.out.print("Please Enter only Numerical Values : \n");
+
+                        // create scanner object for numerical values
+                        Scanner numScanner = new Scanner(System.in);
+
+                        //Add Values to Array
+                        n1[i] = numScanner.nextInt();
+
+                        // Checks first for escape condition of "-1" to exit program
+                        if (Arrays.toString(n1).contains("-1")) {
+
+                            System.out.println("EXITING PROGRAM \n");
+
+                            System.exit(0);
+                        }
+
+                        errormsg = false;
+
+                    } catch (InputMismatchException e) {
+
+                        // accept integer only.
+                        System.out.println("Invalid Input, please enter numerical values only.\n");
+
+                        errormsg = true;
+                    }
+                } while (errormsg);
+            }
+        }
+
+        void reportPrint () {
+            // Calculate Array Values
+
+            int n1_added = n1[0] + n1[1] + n1[2] + n1[3] + n1[4] + n1[5] + n1[6];
+            float n1_average = (float) (n1[0] + n1[1] + n1[2] + n1[3] + n1[4] + n1[5] + n1[6]) / 2;
+            int n1_max = IntStream.of(n1).max().orElse(Integer.MIN_VALUE);
+            int n1_min = IntStream.of(n1).min().orElse(Integer.MAX_VALUE);
+
+            System.out.println("Report Name:" + rname);
+
+            System.out.println("Full Name: " + fn1 + " " + ln1);
+
+            System.out.println("------------------------------------------------");
+
+            System.out.println("|\tHighest Value: \t|\t" + n1_max + "\t");
+
+            System.out.println("------------------------------------------------");
+
+            System.out.println("|\tLowest Value: \t\t" + n1_min + "\t");
+
+            System.out.println("------------------------------------------------");
+
+            System.out.println("|\tAverage: \t\t|\t" + n1_average + "\t");
+
+            System.out.println("------------------------------------------------");
+
+            System.out.println("|\tGrand Total: \t|\t" + n1_added + "\t");
+
+            System.out.println("------------------------------------------------");
+
+            //End Report Name
+            return;
         }
     }
-
-    void reportPrint() {
-        // Calculate Array Values
-
-        int n1_added = n1[0] + n1[1] + n1[2] + n1[3] + n1[4] + n1[5] + n1[6];
-        float n1_average = (float) (n1[0] + n1[1] + n1[2] + n1[3] + n1[4] + n1[5] + n1[6]) / 2;
-        int n1_max = IntStream.of(n1).max().orElse(Integer.MIN_VALUE);
-        int n1_min = IntStream.of(n1).min().orElse(Integer.MAX_VALUE);
-
-        System.out.println("Report Name:" + rname);
-
-        System.out.println("Full Name: " + fn1 + " " + ln1);
-
-        System.out.println("------------------------------------------------");
-
-        System.out.println("|\tHighest Value: \t|\t" + n1_max + "\t");
-
-        System.out.println("------------------------------------------------");
-
-        System.out.println("|\tLowest Value: \t\t" + n1_min + "\t");
-
-        System.out.println("------------------------------------------------");
-
-        System.out.println("|\tAverage: \t\t|\t" + n1_average + "\t");
-
-        System.out.println("------------------------------------------------");
-
-        System.out.println("|\tGrand Total: \t|\t" + n1_added + "\t");
-
-        System.out.println("------------------------------------------------");
-
-        //End Report Name
-        return;
-    }
-}
