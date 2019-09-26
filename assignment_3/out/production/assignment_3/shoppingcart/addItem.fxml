@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="shoppingcart.Controller">
-  <children>
-    <TextField id="item_Name_tf" layoutX="184.0" layoutY="22.0" prefWidth="200.0" />
-    <TextField id="item_Price_tf" layoutX="184.0" layoutY="77.0" prefWidth="200.0" />
-    <TextField id="item_Qty_tf" layoutX="184.0" layoutY="128.0" prefWidth="200.0" />
-    <TextField id="item_priorty_tf" layoutX="184.0" layoutY="181.0" prefWidth="200.0" />
-    <Text id="itemName" layoutX="31.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:" />
-    <Text id="itemQty" layoutX="31.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" />
-    <Text id="itemPriority" layoutX="31.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Priority:" />
-    <Text id="itemPrice" layoutX="31.0" layoutY="207.0" scaleX="1.0" scaleY="0.9999961759667156" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:" />
-    <Button fx:id="itemsAdd" layoutX="170.0" layoutY="260.0" onAction="#handleitemAdd" text="Add Items to Cart" />
-  </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shoppingcart.Controller">
+    <children>
+        <TextField id="item_Name_tf" layoutX="235.0" layoutY="88.0" prefWidth="200.0" />
+        <TextField id="item_Price_tf" layoutX="235.0" layoutY="134.0" prefWidth="200.0" />
+        <TextField id="item_Qty_tf" layoutX="235.0" layoutY="185.0" prefWidth="200.0" />
+        <TextField id="item_priorty_tf" layoutX="235.0" layoutY="230.0" prefWidth="200.0" />
+        <Text id="itemName" layoutX="143.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:" />
+        <Text id="itemQty" layoutX="153.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" />
+        <Text id="itemPriority" layoutX="134.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Priority:" />
+        <Text id="itemPrice" layoutX="146.0" layoutY="247.0" scaleX="1.0" scaleY="0.9999961759667156" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:" />
+        <Button id="itemsAdd" layoutX="180.0" layoutY="287.0" onAction="#handleitemAdd" text="Add Items to Cart" />
+        <Button id="returnCartHome" layoutX="344.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleitemReturnCart" text="Return to Cart" />
+      <TitledPane animated="false" layoutY="-68.0" text="untitled" />
+    </children>
 </AnchorPane>
