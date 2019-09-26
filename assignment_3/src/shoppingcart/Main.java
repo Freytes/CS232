@@ -15,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Shopping Cart");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
     }
