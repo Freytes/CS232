@@ -36,22 +36,10 @@ public class Controller implements Initializable {
     //The Initializer used to load data prior to loading view.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-/*        item_Priority.setCellValueFactory(new PropertyValueFactory<>("ItemPriority"));
-        item_Name.setCellValueFactory(new PropertyValueFactory<>("ItemName"));
-        item_Qty.setCellValueFactory(new PropertyValueFactory<>("ItemQty"));
-        item_Price.setCellValueFactory(new PropertyValueFactory<>("ItemPrice"));
-        item_Table.setItems(observableList);*/
+
 
         System.out.println("Loading user data.");
     }
-
-/*
-    ObservableList<Products> observableList = FXCollections.observableArrayList(
-            new Products("Cookies", 2.00, "2", 1)
-    );
-*/
-
-
 
     public void addItems(ActionEvent event) throws IOException {
 
