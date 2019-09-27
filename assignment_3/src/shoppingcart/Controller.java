@@ -1,5 +1,6 @@
 package shoppingcart;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,8 +38,20 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+       /* //Set up the columns in the table
+        item_Name.setCellValueFactory(new PropertyValueFactory<Products,String>("Orange"));
 
-        System.out.println("Loading user data.");
+        System.out.println("Loading user data.");*/
+    }
+
+   /* private ObservableList<Products> getProducts() {
+
+    }*/
+
+    public void displayItems(){
+        item_Name.setCellValueFactory(c -> new SimpleStringProperty(new String("Orange")));
+        item_Priority.setCellValueFactory(c -> new SimpleStringProperty(new String("456")));
+
     }
 
     public void addItems(ActionEvent event) throws IOException {
