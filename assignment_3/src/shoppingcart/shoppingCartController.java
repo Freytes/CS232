@@ -4,15 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,39 +20,55 @@ public class shoppingCartController implements Initializable {
     @FXML private TableView<Products> item_Table;
     @FXML private TableColumn<Products, String> item_Priority;
     @FXML private TableColumn<Products, String> item_Name;
-    @FXML private TableColumn<Products, Integer> item_Qty;
-    @FXML private TableColumn<Products, Double> item_Price;
+    @FXML private TableColumn<Products, Number> item_Qty;
+    @FXML private TableColumn<Products, Number> item_Price;
+
+    // Fields used to add items to cart
+    @FXML private TextField productName;
+    @FXML private TextField productQty;
+    @FXML private TextField productPrice;
+    @FXML private ChoiceBox productPriority;
+
 
     //The Initializer used to load data prior to loading view.
-    @Override public void initialize(URL url, ResourceBundle resourceBundle) {
-            item_Priority.setCellValueFactory(new PropertyValueFactory<Products, String>("ItemPriority"));
-            item_Name.setCellValueFactory(new PropertyValueFactory<Products, String>("ItemName"));
-            item_Qty.setCellValueFactory(new PropertyValueFactory<Products, Integer>("ItemQty"));
-            item_Price.setCellValueFactory(new PropertyValueFactory<Products, Double>("ItemPrice"));
-            item_Table.setItems(getProduct());
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        item_Priority.setCellValueFactory(cellData -> cellData.getValue().itemPriorityProperty());
+        item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
+        item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
+        item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
+
+        //Display all items in table
+        item_Table.setItems(getProduct());
+
     }
 
     // Method used to get the list of products
     public ObservableList<Products> getProduct() {
-        ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products("Orange", 2.00, "1", 1));
+
+    //Obseravable list which can be used to collect items
+    ObservableList<Products> products = FXCollections.observableArrayList();
         return products;
     }
 
-    public void addItems(ActionEvent event) throws IOException {
+        public void addItems(ActionEvent event) throws IOException {
 
-        Parent addItem_page = FXMLLoader.load(getClass().getResource("addItem.fxml"));
-        Scene addItem_scene = new Scene(addItem_page);
-        Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        addItem_stage.setScene(addItem_scene);
-        addItem_stage.show();
+            Products newProduct = new Products(
+                    productPriority.toString(),
+                    productName.getText(),
+                    Double.parseDouble(productPrice.getText()),
+                    Integer.parseInt(productQty.getText()));
+            item_Table.getItems().add(newProduct);
 
         System.out.println("Displaying information to console: Ensuring the addItem method worked as expected.");
     }
 
-    public void handleitemDelete (ActionEvent event) throws IOException {
+    public void handleitemDelete(ActionEvent event) throws IOException {
 
         System.out.println("Displaying information to console: Deleting Selected Item");
     }
+
 
 }

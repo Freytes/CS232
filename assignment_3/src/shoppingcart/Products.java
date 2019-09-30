@@ -1,8 +1,6 @@
 package shoppingcart;
 
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
 
 public class Products {
     //Variables used to populated Shopping Cart Table
@@ -11,10 +9,10 @@ public class Products {
     private SimpleIntegerProperty itemQty;
     private SimpleDoubleProperty itemPrice;
 
-    public Products(String itemName, double itemPrice, String itemPriority, int itemQty) {
+    public Products( String itemPriority, String itemName, double itemPrice, int itemQty) {
+        this.itemPriority = new SimpleStringProperty(itemPriority);
         this.itemName = new SimpleStringProperty(itemName);
         this.itemPrice = new SimpleDoubleProperty(itemPrice);
-        this.itemPriority = new SimpleStringProperty(itemPriority);
         this.itemQty = new SimpleIntegerProperty(itemQty);
     }
 
@@ -25,6 +23,9 @@ public class Products {
     public void setItemName(String itemName) {
         this.itemName = new SimpleStringProperty(itemName);
     }
+    public StringProperty itemNameProperty() {
+        return itemName;
+    }
 
     public String getItemPriority() {
         return itemPriority.get();
@@ -33,7 +34,9 @@ public class Products {
     public void setItemPriority(String itemPriority) {
         this.itemPriority = new SimpleStringProperty(itemPriority);
     }
-
+    public StringProperty itemPriorityProperty() {
+        return itemPriority;
+    }
     public int getItemQty() {
         return itemQty.get();
     }
@@ -41,12 +44,19 @@ public class Products {
     public void setItemQty(int itemQty) {
         this.itemQty = new SimpleIntegerProperty(itemQty);
     }
+    public IntegerProperty itemQtyProperty() {
+        return itemQty;
+    }
 
     public double getItemPrice() {
         return itemPrice.get();
     }
     public void setItemPrice(double itemPrice) {
         this.itemPrice = new SimpleDoubleProperty(itemPrice);
+    }
+
+    public DoubleProperty itemPriceProperty() {
+        return itemPrice;
     }
 
     public String toString() {
