@@ -62,12 +62,12 @@ public class shoppingCartController implements Initializable {
                     Integer.parseInt(productQty.getText()));
             item_Table.getItems().add(newProduct);
 
-        System.out.println("Displaying information to console: Ensuring the addItem method worked as expected.");
+        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }
 
     public void handleitemDelete(ActionEvent event) throws IOException {
 
-        System.out.println("Displaying information to console: Deleting Selected Item");
+        System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
 
 
