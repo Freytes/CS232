@@ -22,47 +22,34 @@ public class Products {
         return itemName.get();
     }
 
-    public SimpleStringProperty itemNameProperty() {
-        return itemName;
-    }
-
     public void setItemName(String itemName) {
-        this.itemName.set(itemName);
+        this.itemName = new SimpleStringProperty(itemName);
     }
 
     public String getItemPriority() {
         return itemPriority.get();
     }
 
-    public SimpleStringProperty itemPriorityProperty() {
-        return itemPriority;
-    }
-
     public void setItemPriority(String itemPriority) {
-        this.itemPriority.set(itemPriority);
+        this.itemPriority = new SimpleStringProperty(itemPriority);
     }
 
     public int getItemQty() {
         return itemQty.get();
     }
 
-    public SimpleIntegerProperty itemQtyProperty() {
-        return itemQty;
-    }
-
     public void setItemQty(int itemQty) {
-        this.itemQty.set(itemQty);
+        this.itemQty = new SimpleIntegerProperty(itemQty);
     }
 
     public double getItemPrice() {
         return itemPrice.get();
     }
-
-    public SimpleDoubleProperty itemPriceProperty() {
-        return itemPrice;
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice = new SimpleDoubleProperty(itemPrice);
     }
 
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice.set(itemPrice);
+    public String toString() {
+        return String.format("%s %s", itemName, itemPriority);
     }
 }

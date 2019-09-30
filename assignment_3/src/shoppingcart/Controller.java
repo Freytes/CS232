@@ -1,6 +1,5 @@
 package shoppingcart;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,15 +9,51 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    //Capturing textfields used on Form
+    @FXML
+    private TextField productName;
+
+    @FXML
+    private TextField productQty;
+
+    @FXML
+    private TextField productPrice;
+
+    @FXML
+    private TextField productPriority;
+
+    @FXML
+    private AnchorPane productPage;
+
+    @FXML
+    private Button productAdd;
+
+    @FXML
+    private Button productHome;
+
+    @FXML
+    private Text labelitemName;
+
+    @FXML
+    private Text labelitemPriority;
+
+    @FXML
+    private Text labelitemQty;
+
+    @FXML
+    private Text labelitemPrice;
 
     //Table used for Shopping Cart
     @FXML
@@ -32,26 +67,24 @@ public class Controller implements Initializable {
     @FXML
     private TableColumn<Products, Double> item_Price;
 
-
-
     //The Initializer used to load data prior to loading view.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       /* //Set up the columns in the table
-        item_Name.setCellValueFactory(new PropertyValueFactory<Products,String>("Orange"));
+        item_Priority.setCellValueFactory(new PropertyValueFactory<Products, String>("itemPriority"));
+        item_Name.setCellValueFactory(new PropertyValueFactory<Products, String>("itemName"));
+        item_Qty.setCellValueFactory(new PropertyValueFactory<Products, Integer>("itemQty"));
+        item_Price.setCellValueFactory(new PropertyValueFactory<Products, Double>("itemPrice"));
+        item_Table.setItems(getProduct());
 
-        System.out.println("Loading user data.");*/
+        System.out.println("Loading user data.");
     }
 
-   /* private ObservableList<Products> getProducts() {
-
-    }*/
-
-    public void displayItems(){
-        item_Name.setCellValueFactory(c -> new SimpleStringProperty(new String("Orange")));
-        item_Priority.setCellValueFactory(c -> new SimpleStringProperty(new String("456")));
-
+    // Method used to get the list of products
+    public ObservableList<Products> getProduct() {
+        ObservableList<Products> products = FXCollections.observableArrayList();
+        products.add(new Products("Orange", 2.00, "1", 1));
+        return products;
     }
 
     public void addItems(ActionEvent event) throws IOException {
@@ -61,7 +94,6 @@ public class Controller implements Initializable {
         Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         addItem_stage.setScene(addItem_scene);
         addItem_stage.show();
-
 
         System.out.println("Displaying information to console: Ensuring the addItem method worked as expected.");
     }
