@@ -71,14 +71,13 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        item_Priority.setCellValueFactory(new PropertyValueFactory<Products, String>("ItemPriority"));
-        item_Name.setCellValueFactory(new PropertyValueFactory<Products, String>("ItemName"));
-        item_Qty.setCellValueFactory(new PropertyValueFactory<Products, Integer>("ItemQty"));
-        item_Price.setCellValueFactory(new PropertyValueFactory<Products, Double>("ItemPrice"));
+        item_Priority.setCellValueFactory(new PropertyValueFactory<Products, String>("itemPriority"));
+        item_Name.setCellValueFactory(new PropertyValueFactory<Products, String>("itemName"));
+        item_Qty.setCellValueFactory(new PropertyValueFactory<Products, Integer>("itemQty"));
+        item_Price.setCellValueFactory(new PropertyValueFactory<Products, Double>("itemPrice"));
         item_Table.setItems(getProduct());
 
         System.out.println("Loading user data.");
-
     }
 
     // Method used to get the list of products

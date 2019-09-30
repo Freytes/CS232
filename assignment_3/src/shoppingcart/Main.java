@@ -27,21 +27,4 @@ public class Main extends Application {
 
         mainWindow.show();
     }
-/*
-   public ObservableList<Products> getProduct(){
-
-         item_Priority.setCellValueFactory(new PropertyValueFactory<>("ItemPriority"));
-        item_Name.setCellValueFactory(new PropertyValueFactory<>("ItemName"));
-        item_Qty.setCellValueFactory(new PropertyValueFactory<>("ItemQty"));
-        item_Price.setCellValueFactory(new PropertyValueFactory<>("ItemPrice"));
-        item_Table.setItems(observableList);
-
-
-    ObservableList<Products> observableList = FXCollections.observableArrayList(
-            new Products("Cookies", 2.00, "2", 1)
-    );
-
-    }
-    */
-
 }
