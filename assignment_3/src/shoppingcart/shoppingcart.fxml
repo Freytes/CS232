@@ -1,55 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="750.0" prefWidth="800.0"
-            xmlns="http://javafx.com/javafx/2.2" fx:controller="shoppingcart.shoppingCartController">
-  <TableView fx:id="item_Table" layoutX="17.0" layoutY="113.0" prefHeight="418.0" prefWidth="761.0"
-             tableMenuButtonVisible="true">
+<AnchorPane prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shoppingcart.shoppingCartController">
+  <TableView fx:id="item_Table" layoutX="77.0" layoutY="174.0" prefHeight="352.0" prefWidth="646.0" tableMenuButtonVisible="true">
     <columnResizePolicy>
-      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
     </columnResizePolicy>
     <columns>
-      <TableColumn editable="false" prefWidth="75.0" text="Priority" fx:id="item_Priority">
+      <TableColumn fx:id="item_Priority" editable="false" prefWidth="75.0" text="Priority">
         <cellValueFactory>
-          <PropertyValueFactory property="itemPriority"/>
+          <PropertyValueFactory property="itemPriority" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn editable="false" prefWidth="75.0" text="Item Name" fx:id="item_Name">
+      <TableColumn fx:id="item_Name" editable="false" prefWidth="75.0" text="Item Name">
         <cellValueFactory>
-          <PropertyValueFactory property="itemName"/>
+          <PropertyValueFactory property="itemName" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn editable="false" prefWidth="75.0" text="Item Qty" fx:id="item_Qty">
+      <TableColumn fx:id="item_Qty" editable="false" prefWidth="75.0" text="Item Qty">
         <cellValueFactory>
-          <PropertyValueFactory property="itemQty"/>
+          <PropertyValueFactory property="itemQty" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn editable="false" prefWidth="75.0" text="Item Price" fx:id="item_Price">
+      <TableColumn fx:id="item_Price" editable="false" prefWidth="75.0" text="Item Price">
         <cellValueFactory>
-          <PropertyValueFactory property="itemPrice"/>
+          <PropertyValueFactory property="itemPrice" />
         </cellValueFactory>
       </TableColumn>
     </columns>
   </TableView>
-  <Text layoutX="148.0" layoutY="64.0" scaleX="1.4035087719298245" scaleY="1.7005740221599253" strokeType="OUTSIDE"
-        strokeWidth="0.0" text="Shopping Cart Application" wrappingWidth="513.0000000000001">
+  <Text layoutX="199.0" layoutY="119.0" scaleX="1.4035087719298245" scaleY="1.7005740221599253" strokeType="OUTSIDE" strokeWidth="0.0" text="Shopping Cart Application" wrappingWidth="401.1374694108964">
     <font>
-      <Font size="44.0"/>
+      <Font size="34.0" />
     </font>
   </Text>
-  <Button id="itemsDelete" layoutX="445.0" layoutY="549.0" mnemonicParsing="false" onAction="#handleitemDelete"
-          prefHeight="74.0" prefWidth="333.0" text="Delete Selected"/>
-  <Button fx:id="itemsAdd" layoutX="17.0" layoutY="549.0" onAction="#handleitemAddition" prefHeight="74.0"
-          prefWidth="310.0" text="Add Items"/>
+  <Button id="itemsDelete" layoutX="501.0" layoutY="571.0" mnemonicParsing="false" onAction="#handleitemDelete" prefHeight="46.0" prefWidth="222.0" text="Delete Selected" />
+  <Button fx:id="itemsAdd" layoutX="77.0" layoutY="571.0" onAction="#handleitemAddition" prefHeight="46.0" prefWidth="222.0" text="Add Items" />
 </AnchorPane>

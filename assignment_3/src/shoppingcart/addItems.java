@@ -21,44 +21,32 @@ import java.util.ResourceBundle;
 public class addItems implements Initializable {
 
     // Fields used to add items to cart
-    @FXML
-    private TextField productName;
-    @FXML
-    private TextField productQty;
-    @FXML
-    private TextField productPrice;
-    @FXML
-    private ChoiceBox productPriority;
+    @FXML private TextField productName = new TextField();
+    @FXML private TextField productQty = new TextField();
+    @FXML private TextField productPrice = new TextField();
+    @FXML private ChoiceBox productPriority = new ChoiceBox();
 
+    // Create the TableView
+    TableView table = new TableView(shoppingCartController.getProduct());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Used to Initialize the Scene
     }
 
     public void handleitemAdd(ActionEvent event) throws IOException {
-
-        Products newProduct = new Products(
-                productPriority.toString(),
-                productName.getText(),
-                Double.parseDouble(productPrice.getText()),
-                Integer.parseInt(productQty.getText()));
-        // shoppingCartController.getItems().add(newProduct);
-
-
-      /*  FXMLLoader loader = new FXMLLoader();
+        FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("additems.fxml"));
         Parent addItem_page = loader.load();
 
-
-        shoppingCartController controller = loader.getController();
         ObservableList<Products> list = FXCollections.observableArrayList();
-        list.add(new Products(
-                productPriority.toString(),
+
+        list.add(new Products(productPriority.toString(),
                 productName.getText(),
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
-        controller.item_Table.setItems(list);*/
+        table.getItems().add(list);
 
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }

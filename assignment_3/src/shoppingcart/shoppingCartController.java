@@ -9,10 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,7 +28,6 @@ public class shoppingCartController implements Initializable {
 
     private ObservableList<Products> productItems;
 
-
     //The Initializer used to load data prior to loading view.
 
     @Override
@@ -46,18 +43,13 @@ public class shoppingCartController implements Initializable {
 
     }
 
-    public void setItem_Table(ObservableList<Products> productItems) {
-        this.productItems = productItems;
-    }
-
     // Method used to get the list of products
-    public ObservableList<Products> getProduct() {
+    public static ObservableList<Products> getProduct() {
 
     //Obseravable list which can be used to collect items
     ObservableList<Products> products = FXCollections.observableArrayList();
         return products;
     }
-
 
     public void handleitemAddition(ActionEvent event) throws IOException {
 
@@ -69,11 +61,7 @@ public class shoppingCartController implements Initializable {
 
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
-
     public void handleitemDelete(ActionEvent event) throws IOException {
-
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
-
-
 }
