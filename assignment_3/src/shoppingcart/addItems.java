@@ -40,6 +40,8 @@ public class addItems implements Initializable {
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
 
+
+
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }
 
