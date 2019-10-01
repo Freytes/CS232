@@ -4,11 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,11 +28,7 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
 
-    // Fields used to add items to cart
-    @FXML private TextField productName;
-    @FXML private TextField productQty;
-    @FXML private TextField productPrice;
-    @FXML private ChoiceBox productPriority;
+    private ObservableList<Products> productItems;
 
 
     //The Initializer used to load data prior to loading view.
@@ -45,6 +46,10 @@ public class shoppingCartController implements Initializable {
 
     }
 
+    public void setItem_Table(ObservableList<Products> productItems) {
+        this.productItems = productItems;
+    }
+
     // Method used to get the list of products
     public ObservableList<Products> getProduct() {
 
@@ -53,16 +58,16 @@ public class shoppingCartController implements Initializable {
         return products;
     }
 
-        public void addItems(ActionEvent event) throws IOException {
 
-            Products newProduct = new Products(
-                    productPriority.toString(),
-                    productName.getText(),
-                    Double.parseDouble(productPrice.getText()),
-                    Integer.parseInt(productQty.getText()));
-            item_Table.getItems().add(newProduct);
+    public void handleitemAddition(ActionEvent event) throws IOException {
 
-        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
+        Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
+        Scene addItem_scene = new Scene(addItem_page);
+        Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        addItem_stage.setScene(addItem_scene);
+        addItem_stage.show();
+
+        System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
 
     public void handleitemDelete(ActionEvent event) throws IOException {
