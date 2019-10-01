@@ -9,10 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,15 +25,6 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, String> item_Name;
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
-
-    @FXML private TextField productName;
-    @FXML private TextField productQty;
-    @FXML private TextField productPrice;
-    @FXML private ChoiceBox productPriority;
-
-    private ObservableList<Products> products = FXCollections.observableArrayList();
-
-
 
     //The Initializer used to load data prior to loading view.
 
@@ -53,6 +42,7 @@ public class shoppingCartController implements Initializable {
 
     // Method used to get the list of products
     public ObservableList<Products> getProduct(){
+        ObservableList<Products> products = FXCollections.observableArrayList();
 
         return products;
 
@@ -73,11 +63,7 @@ public class shoppingCartController implements Initializable {
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
 
-    public void setTableItems(ObservableList<Products> products) throws IOException {
+    public void setProducts(ObservableList<Products> products)  {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
-        Scene shoppingCart_scene = new Scene(loader.load());
-        shoppingCartController controller =  loader.getController();
-        controller.setTableItems(products);
     }
 }

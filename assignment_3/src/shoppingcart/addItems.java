@@ -35,12 +35,18 @@ public class addItems implements Initializable {
 
     public void handleitemAdd(ActionEvent event) throws IOException {
 
+        //Used to capture Textfield Values
         products.add(new Products(productPriority.toString(),
                 productName.getText(),
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
 
 
+        //Used to connect addItems Scene to shoppingCartController Scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(loader.load());
+        shoppingCartController controller =  loader.getController();
+        controller.setProducts(products);
 
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }
