@@ -10,7 +10,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,8 +25,7 @@ public class addItems implements Initializable {
     @FXML private TextField productPrice = new TextField();
     @FXML private ChoiceBox productPriority = new ChoiceBox();
 
-    // Create the TableView
-    TableView table = new TableView(shoppingCartController.getProduct());
+    private ObservableList<Products> products = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,17 +34,11 @@ public class addItems implements Initializable {
     }
 
     public void handleitemAdd(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("additems.fxml"));
-        Parent addItem_page = loader.load();
 
-        ObservableList<Products> list = FXCollections.observableArrayList();
-
-        list.add(new Products(productPriority.toString(),
+        products.add(new Products(productPriority.toString(),
                 productName.getText(),
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
-        table.getItems().add(list);
 
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }

@@ -9,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,7 +28,14 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
 
-    private ObservableList<Products> productItems;
+    @FXML private TextField productName;
+    @FXML private TextField productQty;
+    @FXML private TextField productPrice;
+    @FXML private ChoiceBox productPriority;
+
+    private ObservableList<Products> products = FXCollections.observableArrayList();
+
+
 
     //The Initializer used to load data prior to loading view.
 
@@ -40,21 +49,20 @@ public class shoppingCartController implements Initializable {
 
         //Display all items in table
         item_Table.setItems(getProduct());
-
     }
 
     // Method used to get the list of products
-    public static ObservableList<Products> getProduct() {
+    public ObservableList<Products> getProduct(){
 
-    //Obseravable list which can be used to collect items
-    ObservableList<Products> products = FXCollections.observableArrayList();
         return products;
+
     }
 
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
         Scene addItem_scene = new Scene(addItem_page);
+
         Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         addItem_stage.setScene(addItem_scene);
         addItem_stage.show();
@@ -63,5 +71,13 @@ public class shoppingCartController implements Initializable {
     }
     public void handleitemDelete(ActionEvent event) throws IOException {
         System.out.println("Displaying information to consoles: Deleting Selected Item");
+    }
+
+    public void setTableItems(ObservableList<Products> products) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(loader.load());
+        shoppingCartController controller =  loader.getController();
+        controller.setTableItems(products);
     }
 }
