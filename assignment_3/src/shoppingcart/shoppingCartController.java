@@ -28,7 +28,6 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, Number> item_Price;
 
     ObservableList<Products> products = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setColumns();
@@ -41,11 +40,12 @@ public class shoppingCartController implements Initializable {
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
 
+        item_Table.setItems(loadData(products));
     }
 
-    public void loadData(ObservableList<Products> products) {
+    public ObservableList<Products> loadData(ObservableList<Products> products) {
 
-        item_Table.getItems().addAll(products);
+       return products;
     }
 
 
@@ -63,4 +63,5 @@ public class shoppingCartController implements Initializable {
     public void handleitemDelete(ActionEvent event) throws IOException {
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
+
 }
