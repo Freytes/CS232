@@ -20,46 +20,47 @@ public class Products {
         return itemName.get();
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = new SimpleStringProperty(itemName);
-    }
-    public StringProperty itemNameProperty() {
+    public SimpleStringProperty itemNameProperty() {
         return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName.set(itemName);
     }
 
     public String getItemPriority() {
         return itemPriority.get();
     }
 
-    public void setItemPriority(String itemPriority) {
-        this.itemPriority = new SimpleStringProperty(itemPriority);
-    }
-    public StringProperty itemPriorityProperty() {
+    public SimpleStringProperty itemPriorityProperty() {
         return itemPriority;
     }
+
+    public void setItemPriority(String itemPriority) {
+        this.itemPriority.set(itemPriority);
+    }
+
     public int getItemQty() {
         return itemQty.get();
     }
 
-    public void setItemQty(int itemQty) {
-        this.itemQty = new SimpleIntegerProperty(itemQty);
-    }
-    public IntegerProperty itemQtyProperty() {
+    public SimpleIntegerProperty itemQtyProperty() {
         return itemQty;
+    }
+
+    public void setItemQty(int itemQty) {
+        this.itemQty.set(itemQty);
     }
 
     public double getItemPrice() {
         return itemPrice.get();
     }
-    public void setItemPrice(double itemPrice) {
-        this.itemPrice = new SimpleDoubleProperty(itemPrice);
-    }
 
-    public DoubleProperty itemPriceProperty() {
+    public SimpleDoubleProperty itemPriceProperty() {
         return itemPrice;
     }
 
-    public String toString() {
-        return String.format("%s %s", itemName, itemPriority);
+    public void setItemPrice(double itemPrice) {
+        this.itemPrice.set(itemPrice);
     }
 }

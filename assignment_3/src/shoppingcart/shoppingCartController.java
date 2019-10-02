@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
 
+
     //Table used for Shopping Cart
     @FXML private TableView<Products> item_Table;
     @FXML private TableColumn<Products, String> item_Priority;
@@ -26,27 +27,27 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
 
-    //The Initializer used to load data prior to loading view.
+    ObservableList<Products> products = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setColumns();
+        loadData(products);
+    }
 
+    public void setColumns() {
         item_Priority.setCellValueFactory(cellData -> cellData.getValue().itemPriorityProperty());
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
 
-        //Display all items in table
-        item_Table.setItems(getProduct());
     }
 
-    // Method used to get the list of products
-    public ObservableList<Products> getProduct(){
-        ObservableList<Products> products = FXCollections.observableArrayList();
+    public void loadData(ObservableList<Products> products) {
 
-        return products;
-
+        item_Table.getItems().addAll(products);
     }
+
 
     public void handleitemAddition(ActionEvent event) throws IOException {
 
@@ -61,9 +62,5 @@ public class shoppingCartController implements Initializable {
     }
     public void handleitemDelete(ActionEvent event) throws IOException {
         System.out.println("Displaying information to consoles: Deleting Selected Item");
-    }
-
-    public void setProducts(ObservableList<Products> products)  {
-
     }
 }
