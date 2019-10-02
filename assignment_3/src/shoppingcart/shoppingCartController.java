@@ -27,28 +27,31 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
 
-    ObservableList<Products> products = FXCollections.observableArrayList();
+    //Set as static so it can be shared between classes
+    static ObservableList<Products> products = FXCollections.observableArrayList();
+
     @Override
+    //When the program intializes it checks performs the following: set headers, adds new items
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setColumns();
         loadData(products);
     }
 
+    // setColumns header information
     public void setColumns() {
         item_Priority.setCellValueFactory(cellData -> cellData.getValue().itemPriorityProperty());
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
 
-        item_Table.setItems(loadData(products));
     }
 
-    public ObservableList<Products> loadData(ObservableList<Products> products) {
-
-       return products;
+    //Sets arraylist and adds items
+    public void loadData(ObservableList<Products> products) {
+        item_Table.getItems().addAll(products);
     }
 
-
+    //Changes to AddScene
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
@@ -60,8 +63,9 @@ public class shoppingCartController implements Initializable {
 
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
+
+    //Deletes items
     public void handleitemDelete(ActionEvent event) throws IOException {
         System.out.println("Displaying information to consoles: Deleting Selected Item");
     }
-
 }

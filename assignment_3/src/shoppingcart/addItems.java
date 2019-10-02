@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static shoppingcart.shoppingCartController.products;
+
 
 public class addItems implements Initializable {
 
@@ -25,6 +27,7 @@ public class addItems implements Initializable {
     @FXML private TextField productQty = new TextField();
     @FXML private TextField productPrice = new TextField();
     @FXML private ChoiceBox productPriority = new ChoiceBox();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,18 +39,15 @@ public class addItems implements Initializable {
 
 
         //Used to connect addItems Scene to shoppingCartController Scene
-        FXMLLoader loader = new FXMLLoader();
-               loader.setLocation(getClass().getResource("shoppingcart.fxml"));
-        Parent tableViewParent = loader.load();
-        Scene tableViewScene = new Scene(tableViewParent);
-        shoppingCartController controller =  loader.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(loader.load());
+        shoppingCartController controller = loader.getController();
 
-
-        ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products(productPriority.toString(),
+        products.addAll(new Products(productPriority.toString(),
                 productName.getText(),
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
+
         controller.loadData(products);
 
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
