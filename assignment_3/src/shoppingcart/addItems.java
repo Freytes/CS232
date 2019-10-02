@@ -22,7 +22,7 @@ import static shoppingcart.shoppingCartController.products;
 
 public class addItems implements Initializable {
 
-    // Fields used to add items to cart
+    // Fields used to add items to cart//
     @FXML private TextField productName = new TextField();
     @FXML private TextField productQty = new TextField();
     @FXML private TextField productPrice = new TextField();

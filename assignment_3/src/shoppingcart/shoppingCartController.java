@@ -46,12 +46,12 @@ public class shoppingCartController implements Initializable {
 
     }
 
-    //Sets arraylist and adds items
+    //Sets arraylist and adds items//
     public void loadData(ObservableList<Products> products) {
         item_Table.getItems().addAll(products);
     }
 
-    //Changes to AddScene
+    //Changes to AddScene//
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
