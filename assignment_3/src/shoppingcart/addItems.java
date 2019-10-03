@@ -1,7 +1,6 @@
 package shoppingcart;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -22,28 +24,37 @@ import static shoppingcart.shoppingCartController.products;
 
 public class addItems implements Initializable {
 
+    // Priority Choice Values
+    private String[] priorityChoice =
+            {"1", "2", "3", "4", "5", "6", "7"};
+
     // Fields used to add items to cart//
-    @FXML private TextField productName = new TextField();
-    @FXML private TextField productQty = new TextField();
-    @FXML private TextField productPrice = new TextField();
-    @FXML private ChoiceBox productPriority = new ChoiceBox();
+    @FXML
+    private TextField productName = new TextField();
+    @FXML
+    private TextField productQty = new TextField();
+    @FXML
+    private TextField productPrice = new TextField();
+    @FXML
+    private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice)));
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //Used to Initialize the Scene
+        // Populating items for the ProductPriority Array
+        arrayItems();
     }
 
     public void handleitemAdd(ActionEvent event) throws IOException {
-
 
         //Used to connect addItems Scene to shoppingCartController Scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
         Scene shoppingCart_scene = new Scene(loader.load());
         shoppingCartController controller = loader.getController();
 
-        products.addAll(new Products(productPriority.toString(),
+        products.addAll(new Products(productPriority.getValue(),
                 productName.getText(),
                 Double.parseDouble(productPrice.getText()),
                 Integer.parseInt(productQty.getText())));
@@ -65,4 +76,24 @@ public class addItems implements Initializable {
 
     }
 
+    public String arrayItems() {
+
+/*            for(int i = 0; i < priorityChoice.length; i++) {
+                if(priorityChoice[i].equals(productPriority)) {
+                    priorityChoice[i] = null;
+                    priorityChoice.removeAllItems();
+                    priorityChoice.addItem(productPriority);
+                }
+            }
+
+            if (priorityChoice.getSelectedIndex() > -1) {
+                productPriority.remove(priorityChoice.getSelectedIndex());
+                productPriority.getSelectedIndex();
+            }*/
+
+
+        //Used to Initialize the Scene
+        productPriority.getItems().addAll(priorityChoice);
+        return String.valueOf(productPriority);
+    }
 }

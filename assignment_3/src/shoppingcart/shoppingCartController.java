@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,6 +27,8 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, String> item_Name;
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
+    @FXML
+    private TextField productGrandtotal = new TextField();
 
     //Set as static so it can be shared between classes
     static ObservableList<Products> products = FXCollections.observableArrayList();

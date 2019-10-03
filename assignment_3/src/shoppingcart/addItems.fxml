@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -11,9 +12,16 @@
     <GridPane layoutX="160.0" layoutY="186.0" prefHeight="380.0" prefWidth="480.0">
       <children>
         <Text id="" fx:id="labelitemPriority" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Priority:"/>
-        <ChoiceBox id="" fx:id="productPriority" disable="true" prefWidth="200.0" GridPane.columnIndex="1"/>
-        <TextField id="" fx:id="productName" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="1"
-                   GridPane.rowIndex="1"/>
+        <ComboBox fx:id="productPriority" prefWidth="380.0" promptText="Please Select Priority" GridPane.columnIndex="1"
+                  GridPane.rowIndex="0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <TextField id="" fx:id="productName" prefHeight="-1.0" prefWidth="-1.0" promptText="Please Enter Item Name"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Text id="" fx:id="labelitemName" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:"
               GridPane.rowIndex="1"/>
         <TextField id="" fx:id="productQty" disable="true" prefWidth="-1.0" text="1" visible="true"
@@ -21,7 +29,8 @@
         <Text id="" fx:id="labelitemQty" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" GridPane.rowIndex="2"/>
         <Text id="" fx:id="labelitemPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:"
               GridPane.rowIndex="3"/>
-        <TextField id="" fx:id="productPrice" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <TextField id="" fx:id="productPrice" prefWidth="-1.0" promptText="Please Enter Item Price"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Button id="itemsAdd" fx:id="productAdd" onAction="#handleitemAdd" prefHeight="37.0" prefWidth="210.0"
                 text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
         <Button id="returnCartHome" fx:id="productHome" mnemonicParsing="false" onAction="#handleitemReturnCart"

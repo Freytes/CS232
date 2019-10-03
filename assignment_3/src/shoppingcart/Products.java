@@ -16,17 +16,7 @@ public class Products {
         this.itemName = new SimpleStringProperty(itemName);
         this.itemPrice = new SimpleDoubleProperty(itemPrice);
         this.itemQty = new SimpleIntegerProperty(itemQty);
-
-        // Initial dummy data
-
-    this.itemPriority = new SimpleStringProperty("-1");
-    this.itemName = new SimpleStringProperty("dummy data");
-    this.itemPrice = new SimpleDoubleProperty(0.0);
-    this.itemQty = new SimpleIntegerProperty(0);
 }
-
-
-
     public String getItemName() {
         return itemName.get();
     }
@@ -72,4 +62,5 @@ public class Products {
     public SimpleDoubleProperty itemPriceProperty() {
         return itemPrice;
     }
+
 }
