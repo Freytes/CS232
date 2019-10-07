@@ -6,17 +6,18 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Products {
     //Variables used to populated Shopping Cart Table
-    private SimpleStringProperty itemName;
-    private SimpleStringProperty itemPriority;
-    private SimpleIntegerProperty itemQty;
-    private SimpleDoubleProperty itemPrice;
+    private SimpleStringProperty itemName = new SimpleStringProperty("Default");
+    private SimpleStringProperty itemPriority = new SimpleStringProperty("1");
+    private SimpleIntegerProperty itemQty = new SimpleIntegerProperty(0);
+    private SimpleDoubleProperty itemPrice = new SimpleDoubleProperty(0);
 
     public Products( String itemPriority, String itemName, double itemPrice, int itemQty) {
         this.itemPriority = new SimpleStringProperty(itemPriority);
         this.itemName = new SimpleStringProperty(itemName);
         this.itemPrice = new SimpleDoubleProperty(itemPrice);
         this.itemQty = new SimpleIntegerProperty(itemQty);
-}
+
+    }
     public String getItemName() {
         return itemName.get();
     }

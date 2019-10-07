@@ -63,7 +63,7 @@ public class addItems implements Initializable {
          controller.loadData(products);
 
          // Clear values
-         productPriority.setPromptText("Please Select Priority");
+         productPriority.getSelectionModel().clearSelection();
          productName.clear();
          productPrice.clear();
          productQty.clear();
@@ -95,20 +95,20 @@ public class addItems implements Initializable {
         public boolean isInputValid() {
             String errorMessage = "";
 
-            if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("\"|[-\\\\+]?|[-\\\\+]?\\\\d+\\\\.?|[-\\\\+]?\\\\d+\\\\.?\\\\d+\"")) {
+            if (productName.getText() == null || productName.getText().length() == 0 || productName.getText().matches("\"|[-\\\\+]?|[-\\\\+]?\\\\d+\\\\.?|[-\\\\+]?\\\\d+\\\\.?\\\\d+\"")) {
                 errorMessage += "Not a valid Product Name!\n";
             }
-            if (productPrice.getText() == null || productPrice.getText().length() == 0) {
+            if (productPrice.getText() == null || productPrice.getText().length() == 0 || !productPrice.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
                 errorMessage += "Not a valid Product Price!\n";
             } else {
                 // try to parse the postal code into an int.
                 try {
-                    Integer.parseInt(productPrice.getText());
+                    Double.parseDouble(productPrice.getText());
                 } catch (NumberFormatException e) {
-                    errorMessage += "Not a valid Product Price (must be an integer)!\n";
+                    errorMessage += "Not a valid Product Price!\n";
                 }
             }
-            if (productQty.getText() == null || productQty.getText().length() == 0) {
+            if (productQty.getText() == null || productQty.getText().length() == 0 || !productQty.getText().matches("[0-9]*")) {
                 errorMessage += "Not a valid Product Qty!\n";
             } else {
                 // try to parse the postal code into an int.
