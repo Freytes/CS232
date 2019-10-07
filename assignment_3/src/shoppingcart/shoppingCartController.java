@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,8 +28,9 @@ public class shoppingCartController implements Initializable {
     @FXML private TableColumn<Products, String> item_Name;
     @FXML private TableColumn<Products, Number> item_Qty;
     @FXML private TableColumn<Products, Number> item_Price;
-    @FXML
-    private TextField productGrandtotal = new TextField();
+    @FXML private TextField productGrandtotal = new TextField();
+    @FXML private TextField cartBudget = new TextField();
+
 
     //Set as static so it can be shared between classes
     static ObservableList<Products> products = FXCollections.observableArrayList();
@@ -51,6 +53,7 @@ public class shoppingCartController implements Initializable {
 
     //Sets arraylist and adds items//
     public void loadData(ObservableList<Products> products) {
+        item_Table.refresh();
         item_Table.getItems().addAll(products);
     }
 
@@ -69,6 +72,29 @@ public class shoppingCartController implements Initializable {
 
     //Deletes items
     public void handleitemDelete(ActionEvent event) throws IOException {
+
+        int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            products.removeAll(products);
+            item_Table.getItems().clear();
+            item_Table.refresh();
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Product Selected");
+            alert.setContentText("Please select an item from the table.");
+
+            alert.showAndWait();
+        }
+
+
+
+
+
+
+
         System.out.println("Displaying information to consoles: Deleting Selected Item");
-    }
+        }
 }
