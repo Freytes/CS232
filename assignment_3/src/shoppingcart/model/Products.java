@@ -1,4 +1,4 @@
-package shoppingcart;
+package shoppingcart.model;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;

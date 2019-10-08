@@ -1,4 +1,4 @@
-package shoppingcart;
+package shoppingcart.view;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -12,25 +12,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import static shoppingcart.shoppingCartController.products;
+import static shoppingcart.view.shoppingCartController.products;
 
 
-public class addItems implements Initializable {
+public class addItemsController implements Initializable {
 
     // Priority Choice Values
    private String[] priorityChoice =
            {"1", "2", "3", "4", "5", "6", "7"};
 
-    //ArrayList<String> priorityChoice = new ArrayList<>();
-
-
-    // Fields used to add items to cart//
+   // Fields used to add items to cart//
     @FXML
     private TextField productName = new TextField();
     @FXML
@@ -122,6 +120,16 @@ public class addItems implements Initializable {
                     errorMessage += "Not a valid Product Qty (must be an integer)!\n";
                 }
             }
+                if (productPriority.getValue() == null || productPriority.getValue().length() == 0 || !productPriority.getValue().matches("[0-9]*")) {
+                    errorMessage += "Not a valid Product Priority!\n";
+                } else {
+                    // try to parse the postal code into an int.
+                    try {
+                        Integer.parseInt(productPriority.getValue());
+                    } catch (NumberFormatException e) {
+                        errorMessage += "Not a valid Product Priority (must be an integer)!\n";
+                    }
+                }
 
             if (errorMessage.length() == 0) {
                 return true;

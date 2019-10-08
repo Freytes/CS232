@@ -4,4 +4,7 @@ module assignment_3 {
     requires javafx.swing;
 
     opens shoppingcart;
+    opens shoppingcart.model;
+    opens shoppingcart.view;
+
 }

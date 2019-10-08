@@ -1,4 +1,4 @@
-package shoppingcart;
+package shoppingcart.view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import shoppingcart.Main;
+import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,15 +33,24 @@ public class shoppingCartController implements Initializable {
     @FXML private TextField productGrandtotal = new TextField();
     @FXML private TextField cartBudget = new TextField();
 
+    //References Main Application to Obtain Table
+    private Main mainApp;
 
-    //Set as static so it can be shared between classes
-    static ObservableList<Products> products = FXCollections.observableArrayList();
+    // The data placed in an ObservableList
+    public static ObservableList<Products> products  = FXCollections.observableArrayList();
+
 
     @Override
     //When the program intializes it checks performs the following: set headers, adds new items
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //sets the column headers
         setColumns();
+        // loads data into the Observable List
         loadData(products);
+        // Calculates the sum of all the items price.
+        getPriceSum();
+        // Calculates & Displays budget
+        getBudget();
     }
 
     // setColumns header information
@@ -57,7 +68,25 @@ public class shoppingCartController implements Initializable {
         item_Table.getItems().addAll(products);
     }
 
-    //Changes to AddScene//
+    public void getPriceSum(){
+        int sum = 0;
+        for(Products products : item_Table.getItems() ){
+            sum = (int) (sum + products.getItemPrice());
+        }
+        productGrandtotal.setText(Integer.toString(sum));
+    }
+
+    public void getBudget(){
+
+        cartBudget.setText(Integer.toString((int) 59.00));
+    }
+
+    public void handlecartCheckout(ActionEvent event)throws IOException{
+        //TODO calculates budget and checks to see if what you can purchase
+
+    }
+
+    //Changes to AddScene
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
@@ -75,8 +104,7 @@ public class shoppingCartController implements Initializable {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            products.removeAll(products);
-            item_Table.getItems().clear();
+            item_Table.getItems().remove(selectedIndex);
             item_Table.refresh();
 
         } else {
@@ -88,13 +116,6 @@ public class shoppingCartController implements Initializable {
 
             alert.showAndWait();
         }
-
-
-
-
-
-
-
         System.out.println("Displaying information to consoles: Deleting Selected Item");
         }
 }
