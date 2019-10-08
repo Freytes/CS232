@@ -70,20 +70,76 @@ public class shoppingCartController implements Initializable {
 
     public void getPriceSum(){
         int sum = 0;
+
         for(Products products : item_Table.getItems() ){
+            if (item_Table.getItems().isEmpty()){
+                sum = 0;
+            }else
             sum = (int) (sum + products.getItemPrice());
-        }
+
+            }
         productGrandtotal.setText(Integer.toString(sum));
     }
 
-    public void getBudget(){
+    public int getBudget(){
 
         cartBudget.setText(Integer.toString((int) 59.00));
+
+        return 0;
+    }
+    public boolean includedinBudget() {
+        String errorMessage = "";
+
+        if (productGrandtotal.getText() == null || productGrandtotal.getText().length() == 0 || !productGrandtotal.getText().matches("[1-9]*")) {
+            errorMessage += "Not a valid total, GrandTotal cannot be 0!\n";
+        } else {
+            // try to parse the GrandTotal into an int.
+            try {
+                Integer.parseInt(productGrandtotal.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Not a valid total, GrandTotal cannot be 0!\n";
+            }
+        }
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Checkout");
+            alert.setHeaderText("Checkout Error");
+            alert.setContentText(errorMessage);
+            alert.showAndWait();
+
+            return false;
+        }
     }
 
     public void handlecartCheckout(ActionEvent event)throws IOException{
+
         //TODO calculates budget and checks to see if what you can purchase
 
+        int budgetAmount = getBudget();
+        if (budgetAmount >= 0) {
+
+            if(includedinBudget()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Success");
+                alert.setHeaderText("Success");
+                alert.setContentText("Success");
+
+                alert.showAndWait();
+            }
+
+        } else {
+            // Budget not greater than zero
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("CheckOut");
+            alert.setHeaderText("Budget must be greater than 0");
+            alert.setContentText("Please input a budget greater than 0");
+
+            alert.showAndWait();
+        }
+        System.out.println("Displaying information to console: Checkout Button Selected");
     }
 
     //Changes to AddScene
@@ -96,7 +152,7 @@ public class shoppingCartController implements Initializable {
         addItem_stage.setScene(addItem_scene);
         addItem_stage.show();
 
-        System.out.println("Displaying information to consoles: Deleting Selected Item");
+        System.out.println("Displaying information to console: Add Item Button Selected");
     }
 
     //Deletes items
@@ -116,6 +172,6 @@ public class shoppingCartController implements Initializable {
 
             alert.showAndWait();
         }
-        System.out.println("Displaying information to consoles: Deleting Selected Item");
+        System.out.println("Displaying information to console: Delete Item Button Selected");
         }
 }

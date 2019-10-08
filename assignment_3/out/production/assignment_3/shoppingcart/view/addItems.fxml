@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="" fx:id="productPage" prefHeight="750.0" prefWidth="800.0"
             xmlns="http://javafx.com/javafx/2.2" fx:controller="shoppingcart.view.addItemsController">
   <children>

@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
 <AnchorPane prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shoppingcart.view.shoppingCartController">
   <TableView fx:id="item_Table" layoutX="77.0" layoutY="174.0" prefHeight="352.0" prefWidth="646.0" tableMenuButtonVisible="true">
     <columnResizePolicy>
@@ -42,10 +51,10 @@
         <children>
             <Button id="itemsDelete" mnemonicParsing="false" onAction="#handleitemDelete" prefHeight="46.0" prefWidth="222.0" text="Delete All" />
             <Button fx:id="itemsAdd" onAction="#handleitemAddition" prefHeight="46.0" prefWidth="222.0" text="Add Items" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="202.0" text="Checkout" />
+            <Button mnemonicParsing="false" onAction="#handlecartCheckout" prefHeight="44.0" prefWidth="202.0" text="Checkout" />
         </children>
     </HBox>
-    <GridPane hgap="15.0" layoutX="400.0" layoutY="550.0" padding="$x1" prefHeight="46.0" prefWidth="315.0">
+    <GridPane hgap="15.0" layoutX="400.0" layoutY="550.0" prefHeight="46.0" prefWidth="315.0">
         <children>
             <TextField fx:id="productGrandtotal" disable="true" editable="false" prefHeight="44.0" prefWidth="294.0" promptText="Total &gt; 100" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grand Total:" textAlignment="CENTER" wrappingWidth="130.95703125" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -64,6 +73,9 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+      <padding>
+         <Insets fx:id="x2" />
+      </padding>
     </GridPane>
    <GridPane disable="true" layoutX="78.0" layoutY="537.0" prefHeight="66.0" prefWidth="234.0">
      <columnConstraints>

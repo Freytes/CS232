@@ -103,7 +103,7 @@ public class addItemsController implements Initializable {
             if (productPrice.getText() == null || productPrice.getText().length() == 0 || !productPrice.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
                 errorMessage += "Not a valid Product Price!\n";
             } else {
-                // try to parse the postal code into an int.
+                // try to parse the Product Price into an Double.
                 try {
                     Double.parseDouble(productPrice.getText());
                 } catch (NumberFormatException e) {
@@ -113,7 +113,7 @@ public class addItemsController implements Initializable {
             if (productQty.getText() == null || productQty.getText().length() == 0 || !productQty.getText().matches("[0-9]*")) {
                 errorMessage += "Not a valid Product Qty!\n";
             } else {
-                // try to parse the postal code into an int.
+                // try to parse the Product Qty into an int.
                 try {
                     Integer.parseInt(productQty.getText());
                 } catch (NumberFormatException e) {
@@ -123,7 +123,7 @@ public class addItemsController implements Initializable {
                 if (productPriority.getValue() == null || productPriority.getValue().length() == 0 || !productPriority.getValue().matches("[0-9]*")) {
                     errorMessage += "Not a valid Product Priority!\n";
                 } else {
-                    // try to parse the postal code into an int.
+                    // try to parse the Product Priority into an int.
                     try {
                         Integer.parseInt(productPriority.getValue());
                     } catch (NumberFormatException e) {

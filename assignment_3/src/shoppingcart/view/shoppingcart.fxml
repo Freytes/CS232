@@ -42,10 +42,10 @@
         <children>
             <Button id="itemsDelete" mnemonicParsing="false" onAction="#handleitemDelete" prefHeight="46.0" prefWidth="222.0" text="Delete All" />
             <Button fx:id="itemsAdd" onAction="#handleitemAddition" prefHeight="46.0" prefWidth="222.0" text="Add Items" />
-            <Button mnemonicParsing="false" prefHeight="44.0" prefWidth="202.0" text="Checkout" />
+            <Button mnemonicParsing="false" onAction="#handlecartCheckout" prefHeight="44.0" prefWidth="202.0" text="Checkout" />
         </children>
     </HBox>
-    <GridPane hgap="15.0" layoutX="400.0" layoutY="550.0" padding="$x1" prefHeight="46.0" prefWidth="315.0">
+    <GridPane hgap="15.0" layoutX="400.0" layoutY="550.0" prefHeight="46.0" prefWidth="315.0">
         <children>
             <TextField fx:id="productGrandtotal" disable="true" editable="false" prefHeight="44.0" prefWidth="294.0" promptText="Total &gt; 100" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grand Total:" textAlignment="CENTER" wrappingWidth="130.95703125" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -64,6 +64,9 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+      <padding>
+         <Insets fx:id="x2" />
+      </padding>
     </GridPane>
    <GridPane disable="true" layoutX="78.0" layoutY="537.0" prefHeight="66.0" prefWidth="234.0">
      <columnConstraints>
