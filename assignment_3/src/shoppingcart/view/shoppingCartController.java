@@ -25,19 +25,26 @@ public class shoppingCartController implements Initializable {
 
 
     //Table used for Shopping Cart
-    @FXML private TableView<Products> item_Table;
-    @FXML private TableColumn<Products, String> item_Priority;
-    @FXML private TableColumn<Products, String> item_Name;
-    @FXML private TableColumn<Products, Number> item_Qty;
-    @FXML private TableColumn<Products, Number> item_Price;
-    @FXML private TextField productGrandtotal = new TextField();
-    @FXML private TextField cartBudget = new TextField();
+    @FXML
+    private TableView<Products> item_Table;
+    @FXML
+    private TableColumn<Products, String> item_Priority;
+    @FXML
+    private TableColumn<Products, String> item_Name;
+    @FXML
+    private TableColumn<Products, Number> item_Qty;
+    @FXML
+    private TableColumn<Products, Number> item_Price;
+    @FXML
+    private TextField productGrandtotal = new TextField();
+    @FXML
+    private TextField cartBudget = new TextField();
 
     //References Main Application to Obtain Table
     private Main mainApp;
 
     // The data placed in an ObservableList
-    public static ObservableList<Products> products  = FXCollections.observableArrayList();
+    public static ObservableList<Products> products = FXCollections.observableArrayList();
 
 
     @Override
@@ -68,25 +75,27 @@ public class shoppingCartController implements Initializable {
         item_Table.getItems().addAll(products);
     }
 
-    public void getPriceSum(){
+    public void getPriceSum() {
         int sum = 0;
 
-        for(Products products : item_Table.getItems() ){
-            if (item_Table.getItems().isEmpty()){
+        for (Products products : item_Table.getItems()) {
+            if (item_Table.getItems().isEmpty()) {
                 sum = 0;
-            }else
-            sum = (int) (sum + products.getItemPrice());
 
-            }
+            } else
+                sum = (int) (sum + products.getItemPrice());
+
+        }
         productGrandtotal.setText(Integer.toString(sum));
     }
 
-    public int getBudget(){
+    public int getBudget() {
 
         cartBudget.setText(Integer.toString((int) 59.00));
 
         return 0;
     }
+
     public boolean includedinBudget() {
         String errorMessage = "";
 
@@ -97,7 +106,7 @@ public class shoppingCartController implements Initializable {
             try {
                 Integer.parseInt(productGrandtotal.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Not a valid total, GrandTotal cannot be 0!\n";
+                errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             }
         }
         if (errorMessage.length() == 0) {
@@ -160,7 +169,9 @@ public class shoppingCartController implements Initializable {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            item_Table.getItems().remove(selectedIndex);
+            // Remove all items in the table
+            products.removeAll(products);
+            item_Table.getItems().clear();
             item_Table.refresh();
 
         } else {
@@ -172,6 +183,14 @@ public class shoppingCartController implements Initializable {
 
             alert.showAndWait();
         }
+
+        // Refreshes TableView after items have been deleted.
+        Parent shoppingCart_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(shoppingCart_page);
+        Stage shoppingCart_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        shoppingCart_stage.setScene(shoppingCart_scene);
+        shoppingCart_stage.show();
+
         System.out.println("Displaying information to console: Delete Item Button Selected");
-        }
+    }
 }
