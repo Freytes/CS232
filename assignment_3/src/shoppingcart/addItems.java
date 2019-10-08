@@ -95,8 +95,12 @@ public class addItems implements Initializable {
         public boolean isInputValid() {
             String errorMessage = "";
 
-            if (productName.getText() == null || productName.getText().length() == 0 || productName.getText().matches("\"|[-\\\\+]?|[-\\\\+]?\\\\d+\\\\.?|[-\\\\+]?\\\\d+\\\\.?\\\\d+\"")) {
+            if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("[a-zA-Z]*")) {
                 errorMessage += "Not a valid Product Name!\n";
+            }
+            if (products.equals(productName)) {
+
+                errorMessage += "Product already exists!\n";
             }
             if (productPrice.getText() == null || productPrice.getText().length() == 0 || !productPrice.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
                 errorMessage += "Not a valid Product Price!\n";
