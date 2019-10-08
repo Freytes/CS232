@@ -11,6 +11,10 @@ public class Products {
     private SimpleIntegerProperty itemQty = new SimpleIntegerProperty(0);
     private SimpleDoubleProperty itemPrice = new SimpleDoubleProperty(0);
 
+    //Default constructor
+    public Products() {
+        this(null, null, 0, 0);
+    }
     public Products( String itemPriority, String itemName, double itemPrice, int itemQty) {
         this.itemPriority = new SimpleStringProperty(itemPriority);
         this.itemName = new SimpleStringProperty(itemName);

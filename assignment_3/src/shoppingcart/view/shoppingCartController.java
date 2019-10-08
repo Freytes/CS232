@@ -75,7 +75,7 @@ public class shoppingCartController implements Initializable {
         item_Table.getItems().addAll(products);
     }
 
-    public void getPriceSum() {
+    public int getPriceSum() {
         int sum = 0;
 
         for (Products products : item_Table.getItems()) {
@@ -87,20 +87,31 @@ public class shoppingCartController implements Initializable {
 
         }
         productGrandtotal.setText(Integer.toString(sum));
+        return sum;
     }
 
     public int getBudget() {
 
-        cartBudget.setText(Integer.toString((int) 59.00));
+        cartBudget.setText(String.valueOf(Integer.valueOf((int) 59.00)));
 
         return 0;
     }
 
-    public boolean includedinBudget() {
+    public boolean cartVerification() {
         String errorMessage = "";
 
-        if (productGrandtotal.getText() == null || productGrandtotal.getText().length() == 0 || !productGrandtotal.getText().matches("[1-9]*")) {
-            errorMessage += "Not a valid total, GrandTotal cannot be 0!\n";
+        int budgetAmount = getBudget();
+
+        int productTotal = getPriceSum();
+
+        String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
+
+        if (budgetAmount < 0) {
+            errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
+        }
+
+        if (productTotal <= 100 || productGrandtotal.getText().matches((dollarMatch))) {
+            errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
         } else {
             // try to parse the GrandTotal into an int.
             try {
@@ -109,6 +120,7 @@ public class shoppingCartController implements Initializable {
                 errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             }
         }
+
         if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -123,33 +135,23 @@ public class shoppingCartController implements Initializable {
         }
     }
 
-    public void handlecartCheckout(ActionEvent event)throws IOException{
+    public void purchaseItems() {
+
+    }
+
+    public void handlecartCheckout(ActionEvent event) throws IOException {
 
         //TODO calculates budget and checks to see if what you can purchase
-
-        int budgetAmount = getBudget();
-        if (budgetAmount >= 0) {
-
-            if(includedinBudget()){
+        if (cartVerification()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Success");
                 alert.setHeaderText("Success");
                 alert.setContentText("Success");
-
                 alert.showAndWait();
-            }
-
-        } else {
-            // Budget not greater than zero
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("CheckOut");
-            alert.setHeaderText("Budget must be greater than 0");
-            alert.setContentText("Please input a budget greater than 0");
-
-            alert.showAndWait();
         }
         System.out.println("Displaying information to console: Checkout Button Selected");
     }
+
 
     //Changes to AddScene
     public void handleitemAddition(ActionEvent event) throws IOException {
