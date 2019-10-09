@@ -90,6 +90,14 @@ public class shoppingCartController implements Initializable {
         return sum;
     }
 
+    public String getProductNames() {
+        String name = null;
+        for (Products nameProducts : item_Table.getItems()) {
+            name = (String) (name + nameProducts.getItemName());
+        }
+        return name;
+    }
+
     public int getBudget() {
 
         cartBudget.setText(String.valueOf(Integer.valueOf((int) 59.00)));

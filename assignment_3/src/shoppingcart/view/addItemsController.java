@@ -17,6 +17,7 @@ import shoppingcart.model.Products;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static shoppingcart.view.shoppingCartController.products;
@@ -94,10 +95,10 @@ public class addItemsController implements Initializable {
         if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("[a-zA-Z]*")) {
             errorMessage += "Not a valid Product Name!\n";
         }
-        if (products.equals(productName)) {
+       /* if (shoppingCartController.getProductNames().matches(String.valueOf(productName))) {
 
             errorMessage += "Product already exists!\n";
-        }
+        }*/
         if (productPrice.getText() == null || productPrice.getText().length() == 0 || !productPrice.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
             errorMessage += "Not a valid Product Price!\n";
         } else {
@@ -142,4 +143,5 @@ public class addItemsController implements Initializable {
             return false;
         }
     }
+
 }
