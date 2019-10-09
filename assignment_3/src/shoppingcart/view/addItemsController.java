@@ -91,7 +91,7 @@ public class addItemsController extends shoppingCartController {
         if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("[a-zA-Z]*")) {
             errorMessage += "Not a valid Product Name!\n";
         }
-/*        if (productName.getText() == getProductNames()) {
+/*        if (!(productName.getText() == getProductNames())) {
 
             errorMessage += "Product already exists!\n";
         }*/

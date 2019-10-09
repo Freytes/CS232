@@ -13,12 +13,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import shoppingcart.Main;
 import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
@@ -75,19 +78,15 @@ public class shoppingCartController implements Initializable {
         item_Table.getItems().addAll(products);
     }
 
-    public int getPriceSum() {
+    public double getPriceSum() {
         double sum = 0;
 
         for (Products products : item_Table.getItems()) {
-            if (item_Table.getItems().isEmpty()) {
-                sum = 0;
-
-            } else
-                sum = (sum + products.getItemPrice());
-
+            sum =  (sum + products.getItemPrice());
         }
-        productGrandtotal.setText(Double.toString(sum));
-        return (int) sum;
+        productGrandtotal.setText(String.valueOf(sum));
+
+        return sum;
     }
 
     public String getProductNames() {
@@ -100,7 +99,7 @@ public class shoppingCartController implements Initializable {
 
     public int getBudget() {
 
-        cartBudget.setText(String.valueOf(Double.valueOf((int) 59.00)));
+        cartBudget.setText(String.valueOf(Integer.valueOf((int) 59.00)));
 
         return 0;
     }
@@ -110,19 +109,19 @@ public class shoppingCartController implements Initializable {
 
         int budgetAmount = getBudget();
 
-        int productTotal = getPriceSum();
+        double productTotal = getPriceSum();
 
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
 
         if (budgetAmount < 0) {
             errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
         }
-        if (productTotal <= 100 || productGrandtotal.getText().matches((dollarMatch))) {
+        if (productTotal <= 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
             errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
         } else {
-            // try to parse the GrandTotal into an int.
+            // try to parse the GrandTotal into an Double.
             try {
-                Integer.parseInt(productGrandtotal.getText());
+                Double.parseDouble(productGrandtotal.getText());
             } catch (NumberFormatException e) {
                 errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             }
@@ -141,24 +140,44 @@ public class shoppingCartController implements Initializable {
             return false;
         }
     }
+   public String completedCart() {
+       Products cartItems = new Products();
+       List<List<String>> arrList = new ArrayList<>();
 
-    public void purchaseItems() {
+       for (int i = 0; i < item_Table.getItems().size(); i++) {
+           cartItems = item_Table.getItems().get(i);
+           arrList.add(new ArrayList<>());
+           arrList.get(i).add("Item Priority:" + cartItems.itemPriorityProperty().get());
+           arrList.get(i).add("Product Name:" + cartItems.itemNameProperty().get());
+           arrList.get(i).add("Product Qty:" + cartItems.itemQtyProperty().getValue());
+           arrList.get(i).add("Product Price:" + cartItems.itemPriceProperty().getValue() + "\n");
+       }
+       for (int i = 0; i < arrList.size(); i++) {
+           String results = " ";
+           for (int j = 0; j < arrList.get(i).size(); j++) {
+               results = (arrList.get(i).get(j));
 
-    }
+           }
+           return results;
+       }
+
+       return null;
+   }
 
     public void handlecartCheckout(ActionEvent event) throws IOException {
 
         //TODO calculates budget and checks to see if what you can purchase
         if (cartVerification()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.setTitle("Success");
                 alert.setHeaderText("Success");
-                alert.setContentText("Success");
+                alert.setContentText(completedCart());
                 alert.showAndWait();
         }
         System.out.println("Displaying information to console: Checkout Button Selected");
     }
-
 
     //Changes to AddScene
     public void handleitemAddition(ActionEvent event) throws IOException {
