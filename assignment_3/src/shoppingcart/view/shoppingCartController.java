@@ -76,31 +76,31 @@ public class shoppingCartController implements Initializable {
     }
 
     public int getPriceSum() {
-        int sum = 0;
+        double sum = 0;
 
         for (Products products : item_Table.getItems()) {
             if (item_Table.getItems().isEmpty()) {
                 sum = 0;
 
             } else
-                sum = (int) (sum + products.getItemPrice());
+                sum = (sum + products.getItemPrice());
 
         }
-        productGrandtotal.setText(Integer.toString(sum));
-        return sum;
+        productGrandtotal.setText(Double.toString(sum));
+        return (int) sum;
     }
 
     public String getProductNames() {
         String name = null;
         for (Products nameProducts : item_Table.getItems()) {
-            name = (String) (name + nameProducts.getItemName());
+            name = name + nameProducts.getItemName();
         }
         return name;
     }
 
     public int getBudget() {
 
-        cartBudget.setText(String.valueOf(Integer.valueOf((int) 59.00)));
+        cartBudget.setText(String.valueOf(Double.valueOf((int) 59.00)));
 
         return 0;
     }
@@ -117,7 +117,6 @@ public class shoppingCartController implements Initializable {
         if (budgetAmount < 0) {
             errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
         }
-
         if (productTotal <= 100 || productGrandtotal.getText().matches((dollarMatch))) {
             errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
         } else {
