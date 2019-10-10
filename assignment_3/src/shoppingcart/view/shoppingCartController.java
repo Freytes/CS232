@@ -1,5 +1,4 @@
 package shoppingcart.view;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,19 +28,19 @@ public class shoppingCartController implements Initializable {
 
     //Table used for Shopping Cart
     @FXML
-    private TableView<Products> item_Table;
+    public TableView<Products> item_Table;
     @FXML
-    private TableColumn<Products, String> item_Priority;
+    public TableColumn<Products, String> item_Priority;
     @FXML
-    private TableColumn<Products, String> item_Name;
+    public TableColumn<Products, String> item_Name;
     @FXML
-    private TableColumn<Products, Number> item_Qty;
+    public TableColumn<Products, Number> item_Qty;
     @FXML
-    private TableColumn<Products, Number> item_Price;
+    public TableColumn<Products, Number> item_Price;
     @FXML
-    private TextField productGrandtotal = new TextField();
+    public TextField productGrandtotal = new TextField();
     @FXML
-    private TextField cartBudget = new TextField();
+    public TextField cartBudget = new TextField();
 
     //References Main Application to Obtain Table
     private Main mainApp;
@@ -72,7 +71,7 @@ public class shoppingCartController implements Initializable {
 
     }
 
-    //Sets arraylist and adds items//
+    //Sets arraylist and adds items
     public void loadData(ObservableList<Products> products) {
         item_Table.refresh();
         item_Table.getItems().addAll(products);
@@ -87,14 +86,6 @@ public class shoppingCartController implements Initializable {
         productGrandtotal.setText(String.valueOf(sum));
 
         return sum;
-    }
-
-    public String getProductNames() {
-        String name = null;
-        for (Products nameProducts : item_Table.getItems()) {
-            name = name + nameProducts.getItemName();
-        }
-        return name;
     }
 
     public int getBudget() {
@@ -140,6 +131,7 @@ public class shoppingCartController implements Initializable {
             return false;
         }
     }
+
    public String completedCart() {
        Products cartItems = new Products();
        List<List<String>> arrList = new ArrayList<>();

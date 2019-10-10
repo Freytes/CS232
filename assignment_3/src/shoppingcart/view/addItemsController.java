@@ -49,6 +49,7 @@ public class addItemsController extends shoppingCartController {
         Scene shoppingCart_scene = new Scene(loader.load());
         shoppingCartController controller = loader.getController();
 
+
         if (isInputValid()) {
             products.addAll(new Products(productPriority.getValue(),
                     productName.getText(),
@@ -88,13 +89,10 @@ public class addItemsController extends shoppingCartController {
     public boolean isInputValid() {
         String errorMessage = "";
 
-        if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("[a-zA-Z]*")) {
+        if (productName.getText() == null || productName.getText().length() == 0 || !productName.getText().matches("[a-zA-Z]*")  ) {
             errorMessage += "Not a valid Product Name!\n";
         }
-/*        if (!(productName.getText() == getProductNames())) {
 
-            errorMessage += "Product already exists!\n";
-        }*/
         if (productPrice.getText() == null || productPrice.getText().length() == 0 || !productPrice.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
             errorMessage += "Not a valid Product Price!\n";
         } else {
@@ -139,5 +137,4 @@ public class addItemsController extends shoppingCartController {
             return false;
         }
     }
-
 }
