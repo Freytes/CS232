@@ -81,7 +81,7 @@ public class shoppingCartController implements Initializable {
         double sum = 0;
 
         for (Products products : item_Table.getItems()) {
-            sum += products.getItemPrice();
+            sum += products.getItemPrice() * products.getItemQty();
         }
         productGrandtotal.setText(String.valueOf(sum));
 
