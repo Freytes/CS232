@@ -58,22 +58,5 @@
 
 1. Main()
     - Display the initial Scene.
-2. Products()
-3. setColumns()
-   - Sets Table column headers.
-4. loadData()
-   - Adds Items to arrayList.
-5. getPriceSum()
-6. getBudget()
-7. completedCart()
-8. handlecartCheckout()
-9. handleitemAddition()
-10. handleitemDelete() 
-11. handleitemReturnCart()
-12. handleitemAdd()
-13. isInputValid()
-14. itemUnique() 
- 
-
-    
+2.  
 ## UML
