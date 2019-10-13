@@ -9,21 +9,27 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
+
+import javax.swing.JOptionPane;
 
 
 public class addItemsController extends shoppingCartController {
 
     // Priority Choice Values
-    private String[] priorityChoice =
-            {"1", "2", "3", "4", "5", "6", "7"};
+    private ArrayList<String> priorityChoice = new ArrayList<>();
+
 
     // Fields used to add items to cart//
     @FXML
@@ -33,39 +39,33 @@ public class addItemsController extends shoppingCartController {
     @FXML
     private TextField productPrice = new TextField();
     @FXML
-    private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice)));
+    private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice.toArray())));
+
+    public static boolean itemUnique(ObservableList<Products> products, Products obj) {
+        if (!products.isEmpty()) {
+            for (Products item : products) {
+                if (obj.getItemName().equalsIgnoreCase(item.getItemName())) {
+                    JOptionPane.showMessageDialog(null, "Error! Duplicate Entry!");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        // Populating items for the ProductPriority Array
-        arrayItems();
-    }
-
-    public void handleitemAdd(ActionEvent event) throws IOException {
-
-        //Used to connect addItems Scene to shoppingCartController Scene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
-        Scene shoppingCart_scene = new Scene(loader.load());
-        shoppingCartController controller = loader.getController();
-
-
-        if (isInputValid()) {
-            products.addAll(new Products(productPriority.getValue(),
-                    productName.getText(),
-                    Double.parseDouble(productPrice.getText()),
-                    Integer.parseInt(productQty.getText())));
-
-            controller.loadData(products);
-
-            // Clear values
-            productPriority.getSelectionModel().clearSelection();
-            productName.clear();
-            productPrice.clear();
-            productQty.clear();
-
+        for (int a = 0; a < 7; a++) {
+            productPriority.getItems().add((a + 1) + "");
         }
-        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
+        for (int a = 0; a < products.size(); a++) {
+            for (int b = 0; b < productPriority.getItems().size(); b++) {
+                if (products.get(a).getItemPriority().equalsIgnoreCase(productPriority.getItems().get(b))) {
+                    productPriority.getItems().remove(productPriority.getItems().get(b));
+                }
+            }
+        }
     }
 
     public void handleitemReturnCart(ActionEvent event) throws IOException {
@@ -79,11 +79,41 @@ public class addItemsController extends shoppingCartController {
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
     }
 
-    public String arrayItems() {
+    public void handleitemAdd(ActionEvent event) throws IOException {
 
-        //Used to Initialize the Scene
-        productPriority.getItems().addAll(priorityChoice);
-        return String.valueOf(productPriority);
+        //Used to connect addItems Scene to shoppingCartController Scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(loader.load());
+        shoppingCartController controller = loader.getController();
+
+
+        if (isInputValid()) {
+            Products p = new Products(productPriority.getValue(),
+                    productName.getText(),
+                    Double.parseDouble(productPrice.getText()),
+                    Integer.parseInt(productQty.getText()));
+            if (itemUnique(products, p)) {
+                products.add(p);
+                productPriority.getItems().remove(productPriority.getValue());
+            }
+
+            controller.loadData(products);
+
+            // Clear values
+            productPriority.getSelectionModel().clearSelection();
+            productName.clear();
+            productPrice.clear();
+            for (int i = 0; i < products.size(); i++) {
+                for (int j = i + 1; j < products.size(); j++) {
+                    if (Integer.parseInt(products.get(i).getItemPriority()) > Integer.parseInt(products.get(j).getItemPriority())) {
+                        Products temp = products.get(i);
+                        products.set(i, products.get(j));
+                        products.set(j, temp);
+                    }
+                }
+            }
+        }
+        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }
 
     public boolean isInputValid() {

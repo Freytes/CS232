@@ -28,6 +28,12 @@ public class Products {
                 ((Products) obj).itemName.equals(itemName);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Products &&
+                ((Products) obj).itemName.equals(itemName);
+    }
+
     public String getItemName() {
         return itemName.get();
     }
