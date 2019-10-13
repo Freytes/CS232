@@ -9,29 +9,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import shoppingcart.model.Products;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import javafx.collections.ObservableList;
-
-import javax.swing.JOptionPane;
-
 
 public class addItemsController extends shoppingCartController {
 
     // Priority Choice Values
     private ArrayList<String> priorityChoice = new ArrayList<>();
 
-
-    // Fields used to add items to cart//
+    // Fields used to add items to cart
     @FXML
     private TextField productName = new TextField();
     @FXML
@@ -41,11 +34,17 @@ public class addItemsController extends shoppingCartController {
     @FXML
     private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice.toArray())));
 
+    //Confirms if item is unique
     public static boolean itemUnique(ObservableList<Products> products, Products obj) {
+
         if (!products.isEmpty()) {
             for (Products item : products) {
                 if (obj.getItemName().equalsIgnoreCase(item.getItemName())) {
-                    JOptionPane.showMessageDialog(null, "Error! Duplicate Entry!");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Duplicate Items");
+                    alert.setHeaderText("Duplicate Items");
+                    alert.setContentText("Item already exists!");
+                    alert.showAndWait();
                     return false;
                 }
             }
@@ -56,6 +55,7 @@ public class addItemsController extends shoppingCartController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //Used to add items to the priorityChoice array list and removes it if used
         for (int a = 0; a < 7; a++) {
             productPriority.getItems().add((a + 1) + "");
         }
@@ -68,6 +68,7 @@ public class addItemsController extends shoppingCartController {
         }
     }
 
+    //Returns user to shoppingCartController.java
     public void handleitemReturnCart(ActionEvent event) throws IOException {
 
         Parent shoppingCart_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
@@ -79,6 +80,7 @@ public class addItemsController extends shoppingCartController {
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
     }
 
+    //Used when the add button is hit on the addItemsController scene
     public void handleitemAdd(ActionEvent event) throws IOException {
 
         //Used to connect addItems Scene to shoppingCartController Scene
@@ -86,12 +88,13 @@ public class addItemsController extends shoppingCartController {
         Scene shoppingCart_scene = new Scene(loader.load());
         shoppingCartController controller = loader.getController();
 
-
+        //Confirm if input is valid
         if (isInputValid()) {
             Products p = new Products(productPriority.getValue(),
                     productName.getText(),
                     Double.parseDouble(productPrice.getText()),
                     Integer.parseInt(productQty.getText()));
+            //Confirm that item is unique before adding to table
             if (itemUnique(products, p)) {
                 products.add(p);
                 productPriority.getItems().remove(productPriority.getValue());
@@ -99,10 +102,12 @@ public class addItemsController extends shoppingCartController {
 
             controller.loadData(products);
 
-            // Clear values
+            // Clear values after submitted
             productPriority.getSelectionModel().clearSelection();
             productName.clear();
             productPrice.clear();
+
+            //Loop used to order the items listed in the table via priority
             for (int i = 0; i < products.size(); i++) {
                 for (int j = i + 1; j < products.size(); j++) {
                     if (Integer.parseInt(products.get(i).getItemPriority()) > Integer.parseInt(products.get(j).getItemPriority())) {
@@ -116,6 +121,7 @@ public class addItemsController extends shoppingCartController {
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }
 
+    //Confirms if user input is valid
     public boolean isInputValid() {
         String errorMessage = "";
 

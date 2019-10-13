@@ -20,8 +20,6 @@ import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
@@ -51,7 +49,7 @@ public class shoppingCartController implements Initializable {
 
 
     @Override
-    //When the program intializes it checks performs the following: set headers, adds new items
+    //When the program initializes it checks performs the following: set headers, adds new items
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //sets the column headers
         setColumns();
@@ -72,13 +70,14 @@ public class shoppingCartController implements Initializable {
 
     }
 
-    //Sets arraylist and adds items//
+    //Sets arraylist and adds items
     public void loadData(ObservableList<Products> products) {
         item_Table.refresh();
         item_Table.getItems().addAll(products);
     }
 
     public double getPriceSum() {
+        //Sets the Grandtotal as items enter table
         double sum = 0;
 
         for (Products products : item_Table.getItems()) {
@@ -98,6 +97,7 @@ public class shoppingCartController implements Initializable {
     }
 
     public double getBudget() {
+        //Sets the Budget Total of a set amount
         cartBudget.setText(String.valueOf(Double.valueOf((double) 59.00)));
         return Double.parseDouble(cartBudget.getText());
     }
@@ -109,6 +109,7 @@ public class shoppingCartController implements Initializable {
         double budgetAmount = getBudget();
         double productTotal = getPriceSum();
 
+        // Loop which collects the items which could be purchased within budget by order or priority
         for (int a = 0; a < products.size(); a++) {
             System.out.println(products.get(a).getItemPrice() + "-" + budgetAmount);
             if (products.get(a).getItemPrice() + products.get(a).getItemPrice() <= budgetAmount) {
@@ -118,8 +119,13 @@ public class shoppingCartController implements Initializable {
             }
         }
 
+        //Initialize Alert Message Variable
         Alert alert = null;
+
+        //Initialize Regex Variable
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
+
+        //Confirm if budget is zero
         if (budgetAmount < 0) {
             errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -128,7 +134,8 @@ public class shoppingCartController implements Initializable {
             alert.setHeaderText("Error");
             alert.setContentText(errorMessage);
             alert.showAndWait();
-            //return errorMessage;
+
+            //Confirm if product total is less than 100 dollars and if total is numeric
         } else if (productTotal < 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
             errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -137,9 +144,9 @@ public class shoppingCartController implements Initializable {
             alert.setHeaderText("Error");
             alert.setContentText(errorMessage);
             alert.showAndWait();
-            //return errorMessage;
         }
 
+        //Confirm budget amount is greater than 0 and productTotal is greater or equal to 100
         if (budgetAmount > 0 && productTotal >= 100) {
 
             alert = new Alert(Alert.AlertType.INFORMATION);
@@ -159,7 +166,7 @@ public class shoppingCartController implements Initializable {
         System.out.println("Displaying information to console: Checkout Button Selected");
     }
 
-    //Changes to AddScene
+    //Changes scene to addItems.java
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
@@ -170,7 +177,7 @@ public class shoppingCartController implements Initializable {
         System.out.println("Displaying information to console: Add Item Button Selected");
     }
 
-    //Deletes items
+    //Deletes all-items after something is selected in table
     public void handleitemDelete(ActionEvent event) throws IOException {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
@@ -181,7 +188,7 @@ public class shoppingCartController implements Initializable {
             item_Table.refresh();
 
         } else {
-            // Nothing selected.
+            // Alert when no items are selected when delete button is hit
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Product Selected");
