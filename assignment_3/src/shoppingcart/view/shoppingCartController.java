@@ -140,7 +140,6 @@ public class shoppingCartController implements Initializable {
             //return errorMessage;
         }
 
-
         if (budgetAmount > 0 && productTotal >= 100) {
 
             alert = new Alert(Alert.AlertType.INFORMATION);
