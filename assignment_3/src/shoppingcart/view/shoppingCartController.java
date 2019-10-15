@@ -101,7 +101,7 @@ public class shoppingCartController implements Initializable {
         double budgetAmount = getBudget();
         double productTotal = getPriceSum();
 
-        // Loop which collects the items which could be purchased within budget by order or priority
+        // Loop which collects the items which could be purchased within budget by order of priority
         double sum = 0;
         for (int a = 0; a < products.size(); a++) {
             sum += products.get(a).getItemPrice();

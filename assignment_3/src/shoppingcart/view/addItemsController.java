@@ -34,24 +34,6 @@ public class addItemsController extends shoppingCartController {
     @FXML
     private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice.toArray())));
 
-    //Confirms if item is unique
-    public static boolean itemUnique(ObservableList<Products> products, Products obj) {
-
-        if (!products.isEmpty()) {
-            for (Products item : products) {
-                if (obj.getItemName().equalsIgnoreCase(item.getItemName())) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Duplicate Items");
-                    alert.setHeaderText("Duplicate Items");
-                    alert.setContentText("Item already exists!");
-                    alert.showAndWait();
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -78,6 +60,24 @@ public class addItemsController extends shoppingCartController {
         shoppingCart_stage.show();
 
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
+    }
+
+    //Confirms if item is unique
+    public static boolean itemUnique(ObservableList<Products> products, Products obj) {
+
+        if (!products.isEmpty()) {
+            for (Products item : products) {
+                if (obj.getItemName().equalsIgnoreCase(item.getItemName())) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Duplicate Items");
+                    alert.setHeaderText("Duplicate Items");
+                    alert.setContentText("Item already exists!");
+                    alert.showAndWait();
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     //Used when the add button is hit on the addItemsController scene
@@ -107,7 +107,7 @@ public class addItemsController extends shoppingCartController {
             productName.clear();
             productPrice.clear();
 
-            //Loop used to order the items listed in the table via priority
+            //Loop used to order the items listed in the table via priority allowing to be purchased in order
             for (int i = 0; i < products.size(); i++) {
                 for (int j = i + 1; j < products.size(); j++) {
                     if (Integer.parseInt(products.get(i).getItemPriority()) > Integer.parseInt(products.get(j).getItemPriority())) {

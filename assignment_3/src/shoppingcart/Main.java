@@ -14,8 +14,6 @@ public class Main extends Application {
     //Initializing Main Window
     public Stage mainWindow;
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
