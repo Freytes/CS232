@@ -15,10 +15,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import shoppingcart.database.DBConnector;
 import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
@@ -49,7 +53,7 @@ public class shoppingCartController implements Initializable {
             loadData(products);
             // Calculates the sum of all the items price.
             getPriceSum();
-            // Calculates & Displays budget
+
             getBudget();
         }else {
             System.out.println("Not Connected to Database");
@@ -67,8 +71,17 @@ public class shoppingCartController implements Initializable {
 
     //Sets arraylist and adds items
     public void loadData(ObservableList<Products> products) {
+        try {
+            Connection c = DBConnector.Connector();
+            ResultSet rs= c.createStatement().executeQuery("SELECT * FROM shoppingCartapp");
+            while (rs.next()){
+                item_Table.getItems().addAll(products);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         item_Table.refresh();
-        item_Table.getItems().addAll(products);
+
     }
 
     public double getPriceSum() {
@@ -88,7 +101,6 @@ public class shoppingCartController implements Initializable {
         cartBudget.setText(String.valueOf(Double.valueOf(59.00)));
 
         return Double.parseDouble(cartBudget.getText());
-
 
     }
 

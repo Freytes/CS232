@@ -91,7 +91,7 @@
                <Font size="24.0" />
             </font>
          </Text>
-         <TextField fx:id="cartBudget" prefHeight="50.0" prefWidth="145.0" GridPane.columnIndex="1" />
+         <TextField fx:id="cartBudget" editable="false" prefHeight="50.0" prefWidth="145.0" GridPane.columnIndex="1" />
       </children>
    </GridPane>
 </AnchorPane>
