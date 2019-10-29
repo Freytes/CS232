@@ -6,7 +6,8 @@ public class DBConnector {
     public static Connection Connector(){
         try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn =DriverManager.getConnection("jdbc:sqlite:src/shoppingcart/database/DB/shoppingcart.sqlite");
+            //Creates a connection to the shoppingcart.db database
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:src/shoppingcart/database/DB/shoppingcart.db");
             return conn;
         } catch (Exception e) {
             System.out.println(e);

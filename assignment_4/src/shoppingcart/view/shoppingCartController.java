@@ -72,15 +72,31 @@ public class shoppingCartController implements Initializable {
     //Sets arraylist and adds items
     public void loadData(ObservableList<Products> products) {
         try {
+            //Creates Initial Database Connection
             Connection c = DBConnector.Connector();
-            ResultSet rs= c.createStatement().executeQuery("SELECT * FROM shoppingCartapp");
-            while (rs.next()){
-                item_Table.getItems().addAll(products);
+            //Intial SQL statement
+            String SQL = "SELECT * FROM shoppingcart";
+            //Asserts the connection is not null
+            assert c != null;
+            //Resultset compiles, creates and executes the SQL statement
+            ResultSet rs= c.createStatement().executeQuery(SQL);
+
+            //Loops through the database columns
+            while (rs.next()) {
+                //Creates and inflates the Observable list of Products
+                Products np = new Products();
+                //Column headers of the Shoppingcart database
+                np.itemPriorityProperty().set(rs.getString("productPriority"));
+                np.itemNameProperty().set(rs.getString("productName"));
+                np.itemQtyProperty().set(rs.getInt("productQty"));
+                np.itemPriceProperty().set(rs.getDouble("productPrice"));
+                products.add(np);
             }
+            item_Table.setItems(products);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        item_Table.refresh();
 
     }
 
