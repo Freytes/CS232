@@ -66,7 +66,6 @@ public class shoppingCartController implements Initializable {
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
-
     }
 
     //Sets arraylist and adds items
@@ -83,20 +82,24 @@ public class shoppingCartController implements Initializable {
 
             //Loops through the database columns
             while (rs.next()) {
-                //Creates and inflates the Observable list of Products
-                Products np = new Products();
+
                 //Column headers of the Shoppingcart database
-                np.itemPriorityProperty().set(rs.getString("productPriority"));
-                np.itemNameProperty().set(rs.getString("productName"));
-                np.itemQtyProperty().set(rs.getInt("productQty"));
-                np.itemPriceProperty().set(rs.getDouble("productPrice"));
-                products.add(np);
+
+                products.add(
+                        new Products(rs.getString("productPriority"),
+                                rs.getString("productName"),
+                                rs.getInt("productQty"),
+                                rs.getInt("productPrice")
+                        ));
             }
+
+            //Adds items to table
             item_Table.setItems(products);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 
