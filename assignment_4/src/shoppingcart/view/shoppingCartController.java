@@ -90,7 +90,7 @@ public class shoppingCartController implements Initializable {
                 np.itemNameProperty().set(rs.getString("productName"));
                 np.itemQtyProperty().set(rs.getInt("productQty"));
                 np.itemPriceProperty().set(rs.getDouble("productPrice"));
-                products.add(np);
+
             }
             item_Table.setItems(products);
 
