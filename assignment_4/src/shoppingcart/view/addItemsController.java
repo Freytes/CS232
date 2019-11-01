@@ -1,7 +1,6 @@
 package shoppingcart.view;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import shoppingcart.model.Products;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,7 +57,7 @@ public class addItemsController extends shoppingCartController {
             int quantity = Integer.parseInt(productQty.getText());
 
             boolean added = db.insert(priority, name, quantity, price);
-            if(!added){
+            if(added == false){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.setTitle("Error");
@@ -91,18 +88,6 @@ public class addItemsController extends shoppingCartController {
         shoppingCart_stage.show();
 
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
-    }
-
-    public static boolean itemUnique(ObservableList<Products> products, Products obj){
-        if(!products.isEmpty()){
-            for(Products item: products){
-                if(obj.getItemName().equalsIgnoreCase(item.getItemName())){
-                    JOptionPane.showMessageDialog(null, "Error! Duplicate Entry!");
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public boolean isInputValid() {

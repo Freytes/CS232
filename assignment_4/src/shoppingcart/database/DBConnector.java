@@ -31,6 +31,14 @@ public class DBConnector {
     }
 
     public boolean insert(int priority, String name, int quantity, double price) {
+        ObservableList<Products> productsList = get();
+        for (int i = 0; i < productsList.size(); i++) {
+            if(productsList.get(i).getItemName().equalsIgnoreCase(name)){
+                return false;
+            }
+        }
+
+
         Connection c = null;
         PreparedStatement stmt = null;
 
