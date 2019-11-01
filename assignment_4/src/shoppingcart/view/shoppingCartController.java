@@ -184,7 +184,7 @@ public class shoppingCartController implements Initializable {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            db.delete(Integer.parseInt(db.get().get(selectedIndex).getItemPriority()));
+            db.delete(Integer.parseInt(db.get().get(selectedIndex).getItemID()));
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
