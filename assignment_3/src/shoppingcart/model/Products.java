@@ -22,7 +22,7 @@ public class Products {
         this.itemQty = new SimpleIntegerProperty(itemQty);
 
     }
-@Override
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof Products &&
                 ((Products) obj).itemName.equals(itemName);

@@ -4,42 +4,53 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane id="" fx:id="productPage" prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shoppingcart.view.addItemsController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="" fx:id="productPage" prefHeight="750.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/2.2" fx:controller="shoppingcart.view.addItemsController">
   <children>
     <GridPane layoutX="160.0" layoutY="186.0" prefHeight="380.0" prefWidth="480.0">
       <children>
-        <Text id="" fx:id="labelitemPriority" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Priority:" />
-        <ComboBox fx:id="productPriority" prefWidth="380.0" promptText="Please Select Priority" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Text id="" fx:id="labelitemPriority" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Priority:"/>
+        <ComboBox fx:id="productPriority" prefWidth="380.0" promptText="Please Select Priority" GridPane.columnIndex="1"
+                  GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
 
             </FXCollections>
           </items>
         </ComboBox>
-        <TextField id="" fx:id="productName" prefHeight="-1.0" prefWidth="-1.0" promptText="Please Enter Item Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Text id="" fx:id="labelitemName" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:" GridPane.rowIndex="1" />
-        <TextField id="" fx:id="productQty" disable="true" prefWidth="-1.0" text="1" visible="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <Text id="" fx:id="labelitemQty" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" GridPane.rowIndex="2" />
-        <Text id="" fx:id="labelitemPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:" GridPane.rowIndex="3" />
-        <TextField id="" fx:id="productPrice" prefWidth="-1.0" promptText="Please Enter Item Price" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <Button id="itemsAdd" fx:id="productAdd" onAction="#handleitemAdd" prefHeight="37.0" prefWidth="210.0" text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <Button id="returnCartHome" fx:id="productHome" mnemonicParsing="false" onAction="#handleitemReturnCart" prefHeight="48.0" prefWidth="201.0" text="Return to Cart" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <TextField id="" fx:id="productName" prefHeight="-1.0" prefWidth="-1.0" promptText="Please Enter Item Name"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Text id="" fx:id="labelitemName" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:"
+              GridPane.rowIndex="1"/>
+        <TextField id="" fx:id="productQty" prefWidth="-1.0" text="1" visible="true"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        <Text id="" fx:id="labelitemQty" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" GridPane.rowIndex="2"/>
+        <Text id="" fx:id="labelitemPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:"
+              GridPane.rowIndex="3"/>
+        <TextField id="" fx:id="productPrice" prefWidth="-1.0" promptText="Please Enter Item Price"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button id="itemsAdd" fx:id="productAdd" onAction="#handleitemAdd" prefHeight="37.0" prefWidth="210.0"
+                text="ADD" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Button id="returnCartHome" fx:id="productHome" mnemonicParsing="false" onAction="#handleitemReturnCart"
+                prefHeight="48.0" prefWidth="201.0" text="Return to Cart" GridPane.columnIndex="0"
+                GridPane.rowIndex="4"/>
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES"/>
       </rowConstraints>
     </GridPane>
-    <Text layoutX="354.0" layoutY="146.0" scaleX="4.085561690303489" scaleY="4.947136563876652" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Items" wrappingWidth="67.541015625">
+    <Text layoutX="354.0" layoutY="146.0" scaleX="4.085561690303489" scaleY="4.947136563876652" strokeType="OUTSIDE"
+          strokeWidth="0.0" text="Add Items" wrappingWidth="67.541015625">
       <font>
-        <Font size="14.0" />
+        <Font size="14.0"/>
       </font>
     </Text>
   </children>

@@ -14,19 +14,21 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import shoppingcart.model.Products;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+
 
 public class addItemsController extends shoppingCartController {
 
     // Priority Choice Values
     private ArrayList<String> priorityChoice = new ArrayList<>();
 
-    // Fields used to add items to cart
+
+    // Fields used to add items to cart//
     @FXML
     private TextField productName = new TextField();
     @FXML
@@ -36,26 +38,41 @@ public class addItemsController extends shoppingCartController {
     @FXML
     private ComboBox<String> productPriority = new ComboBox<String>(FXCollections.observableArrayList(Arrays.toString(priorityChoice.toArray())));
 
-    public addItemsController() throws SQLException {
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //Used to add items to the priorityChoice array list and removes it if used
         for (int a = 0; a < 7; a++) {
-            productPriority.getItems().add((a + 1) + "");
-        }
-        for (int a = 0; a < products.size(); a++) {
-            for (int b = 0; b < productPriority.getItems().size(); b++) {
-                if (products.get(a).getItemPriority().equalsIgnoreCase(productPriority.getItems().get(b))) {
-                    productPriority.getItems().remove(productPriority.getItems().get(b));
-                }
-            }
+            productPriority.getItems().add((a+1)+"");
         }
     }
 
-    //Returns user to shoppingCartController.java
+    public void handleitemAdd(ActionEvent event) throws IOException {
+
+        //Used to connect addItems Scene to shoppingCartController Scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
+        Scene shoppingCart_scene = new Scene(loader.load());
+        shoppingCartController controller = loader.getController();
+
+        if (isInputValid()) {
+
+            int priority = Integer.parseInt(productPriority.getValue());
+            String name = productName.getText();
+            double price = Double.parseDouble(productPrice.getText());
+            int quantity = Integer.parseInt(productQty.getText());
+
+                db.insert(priority, name, quantity, price);
+                //products.add(p);
+                productPriority.getItems().remove(productPriority.getValue());
+
+                controller.loadData(db.get());
+
+                // Clear values
+                productPriority.getSelectionModel().clearSelection();
+                productName.clear();
+                productPrice.clear();
+        }
+        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
+    }
+
     public void handleitemReturnCart(ActionEvent event) throws IOException {
 
         Parent shoppingCart_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
@@ -67,17 +84,11 @@ public class addItemsController extends shoppingCartController {
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
     }
 
-    //Confirms if item is unique
-    public static boolean itemUnique(ObservableList<Products> products, Products obj) {
-
-        if (!products.isEmpty()) {
-            for (Products item : products) {
-                if (obj.getItemName().equalsIgnoreCase(item.getItemName())) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Duplicate Items");
-                    alert.setHeaderText("Duplicate Items");
-                    alert.setContentText("Item already exists!");
-                    alert.showAndWait();
+    public static boolean itemUnique(ObservableList<Products> products, Products obj){
+        if(!products.isEmpty()){
+            for(Products item: products){
+                if(obj.getItemName().equalsIgnoreCase(item.getItemName())){
+                    JOptionPane.showMessageDialog(null, "Error! Duplicate Entry!");
                     return false;
                 }
             }
@@ -85,48 +96,6 @@ public class addItemsController extends shoppingCartController {
         return true;
     }
 
-    //Used when the add button is hit on the addItemsController scene
-    public void handleitemAdd(ActionEvent event) throws IOException {
-
-        //Used to connect addItems Scene to shoppingCartController Scene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));
-        Scene shoppingCart_scene = new Scene(loader.load());
-        shoppingCartController controller = loader.getController();
-
-        //Confirm if input is valid
-        if (isInputValid()) {
-            Products p = new Products(productPriority.getValue(),
-                    productName.getText(),
-                    Double.parseDouble(productPrice.getText()),
-                    Integer.parseInt(productQty.getText()));
-            //Confirm that item is unique before adding to table
-            if (itemUnique(products, p)) {
-                products.add(p);
-                productPriority.getItems().remove(productPriority.getValue());
-            }
-
-            controller.loadData(products);
-
-            // Clear values after submitted
-            productPriority.getSelectionModel().clearSelection();
-            productName.clear();
-            productPrice.clear();
-
-            //Loop used to order the items listed in the table via priority allowing to be purchased in order
-            for (int i = 0; i < products.size(); i++) {
-                for (int j = i + 1; j < products.size(); j++) {
-                    if (Integer.parseInt(products.get(i).getItemPriority()) > Integer.parseInt(products.get(j).getItemPriority())) {
-                        Products temp = products.get(i);
-                        products.set(i, products.get(j));
-                        products.set(j, temp);
-                    }
-                }
-            }
-        }
-        System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
-    }
-
-    //Confirms if user input is valid
     public boolean isInputValid() {
         String errorMessage = "";
 
@@ -178,4 +147,5 @@ public class addItemsController extends shoppingCartController {
             return false;
         }
     }
+
 }

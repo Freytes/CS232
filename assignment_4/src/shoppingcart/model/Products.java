@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Products {
     //Variables used to populated Shopping Cart Table
+    private SimpleStringProperty itemID;
     private SimpleStringProperty itemName;
     private SimpleStringProperty itemPriority;
     private SimpleIntegerProperty itemQty;
@@ -13,9 +14,10 @@ public class Products {
 
     //Default constructor
     public Products() {
-        this(null, null, 0, 0);
+        this(null,null, null, 0, 0);
     }
-    public Products( String itemPriority, String itemName, double itemPrice, int itemQty) {
+    public Products( String itemID,String itemPriority, String itemName, double itemPrice, int itemQty) {
+        this.itemID = new SimpleStringProperty(itemID);
         this.itemPriority = new SimpleStringProperty(itemPriority);
         this.itemName = new SimpleStringProperty(itemName);
         this.itemPrice = new SimpleDoubleProperty(itemPrice);
@@ -27,6 +29,18 @@ public class Products {
         return obj instanceof Products &&
                 ((Products) obj).itemName.equals(itemName);
     }
+    public String getItemID() {
+        return itemID.get();
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID.set(itemID);
+    }
+
+    public SimpleStringProperty itemIDProperty() {
+        return itemID;
+    }
+
     public String getItemName() {
         return itemName.get();
     }
@@ -38,6 +52,7 @@ public class Products {
     public SimpleStringProperty itemNameProperty() {
         return itemName;
     }
+
 
     public String getItemPriority() {
         return itemPriority.get();

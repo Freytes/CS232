@@ -1,6 +1,5 @@
 package shoppingcart.view;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,95 +19,66 @@ import shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
 
+
     //Table used for Shopping Cart
-    @FXML private TableView<Products> item_Table;
-    @FXML private TableColumn<Products, String> item_Priority;
-    @FXML private TableColumn<Products, String> item_Name;
-    @FXML private TableColumn<Products, Number> item_Qty;
-    @FXML private TableColumn<Products, Number> item_Price;
-    @FXML private TextField productGrandtotal = new TextField();
-    @FXML private TextField cartBudget = new TextField();
+    @FXML
+    public TableView<Products> item_Table;
+    @FXML
+    public TableColumn<Products, String> item_ID;
+    @FXML
+    public TableColumn<Products, String> item_Priority;
+    @FXML
+    public TableColumn<Products, String> item_Name;
+    @FXML
+    public TableColumn<Products, Number> item_Qty;
+    @FXML
+    public TableColumn<Products, Number> item_Price;
+    @FXML
+    public TextField productGrandtotal = new TextField();
+    @FXML
+    public TextField cartBudget = new TextField();
 
-    //References shoppingCartModel for DB Connection
-    public shoppingCartModel shoppingCartModel = new shoppingCartModel();
-
-    // The data placed in an ObservableList
-    public static ObservableList<Products> products = FXCollections.observableArrayList();
-
+    //Database instance
+    public static DBConnector db = new DBConnector();
 
     @Override
-    //When the program initializes it checks performs the following: set headers, adds new items
+    //When the program intializes it checks performs the following: set headers, adds new items
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (shoppingCartModel.isDbConnected()){
-            //sets the column headers
-            setColumns();
-            // loads data into the Observable List
-            loadData(products);
-            // Calculates the sum of all the items price.
-            getPriceSum();
-
-            getBudget();
-        }else {
-            System.out.println("Not Connected to Database");
-        }
+        //connect to database
+        db.connect();
+        //sets the column headers
+        setColumns();
+        // loads data into the Observable List
+        loadData(db.get());
+        // Calculates the sum of all the items price.
+        getPriceSum();
     }
 
     // setColumns header information
     public void setColumns() {
+        item_ID.setCellValueFactory(cellData -> cellData.getValue().itemIDProperty());
         item_Priority.setCellValueFactory(cellData -> cellData.getValue().itemPriorityProperty());
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
+
     }
 
-    //Sets arraylist and adds items
+    //Sets arraylist and adds items//
     public void loadData(ObservableList<Products> products) {
-        try {
-            //Creates Initial Database Connection
-            Connection c = DBConnector.Connector();
-            //Intial SQL statement
-            String SQL = "SELECT * FROM shoppingcart";
-            //Asserts the connection is not null
-            assert c != null;
-            //Resultset compiles, creates and executes the SQL statement
-            ResultSet rs= c.createStatement().executeQuery(SQL);
-
-            //Loops through the database columns
-            while (rs.next()) {
-
-                //Column headers of the Shoppingcart database
-
-                products.add(
-                        new Products(rs.getString("productPriority"),
-                                rs.getString("productName"),
-                                rs.getInt("productQty"),
-                                rs.getInt("productPrice")
-                        ));
-            }
-
-            //Adds items to table
-            item_Table.setItems(products);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
+        item_Table.refresh();
+        item_Table.getItems().addAll(db.get());
     }
 
     public double getPriceSum() {
-        //Sets the Grandtotal as items enter table
         double sum = 0;
 
         for (Products products : item_Table.getItems()) {
-            sum += products.getItemPrice() * products.getItemQty();
+            sum += products.getItemPrice();
         }
         productGrandtotal.setText(String.valueOf(sum));
 
@@ -116,50 +86,62 @@ public class shoppingCartController implements Initializable {
     }
 
     public double getBudget() {
-        //Sets the Budget Total of a set amount
-        cartBudget.setText(String.valueOf(Double.valueOf(59.00)));
-
         return Double.parseDouble(cartBudget.getText());
-
     }
-
     public String completedCart() {
         String errorMessage = "";
-        String purchases = "Purchases:\n";
-        String notPurchases = "Items cannot be purchased:\n";
+        String purchases = "Purchased:\n";
+        String notPurchases = "Items could not be purchased:\n";
         double budgetAmount = getBudget();
         double productTotal = getPriceSum();
-
-        // Loop which collects the items which could be purchased within budget by order of priority
         double sum = 0;
-        for (int a = 0; a < products.size(); a++) {
-            sum += products.get(a).getItemPrice();
-            if (sum <= budgetAmount) {
-                purchases += products.get(a).getItemName() + " | " + products.get(a).getItemPrice() + " | " + products.get(a).getItemQty() + "\n";
-            } else {
-                sum -= products.get(a).getItemPrice();
-                notPurchases += products.get(a).getItemName() + " | " + products.get(a).getItemPrice() + " | " + products.get(a).getItemQty() + "\n";
+        for (int a = 0; a < db.get().size(); a++) {
+            sum += db.get().get(a).getItemPrice();
+            int q = db.get().get(a).getItemQty()-1;
+            int Q = 1;
+            System.out.println("Quantity: "+q);
+            while(true){
+                System.out.println("SUM: "+sum);
+                if(sum+db.get().get(a).getItemPrice() <= budgetAmount && q != 0){
+                    sum += db.get().get(a).getItemPrice();
+                    Q++;
+                }
+                else if(sum == budgetAmount){
+                    break;
+                }
+                else
+                    break;
+                if(q == 0){
+                    break;
+                }
+                q--;
+            }
+            System.out.println("Sum Now: "+sum);
+            if(sum <= budgetAmount){
+                System.out.println("Purchased...");
+                purchases += db.get().get(a).getItemName()+" | "+db.get().get(a).getItemPrice()
+                        +" | "+Q+"\n";
+            }
+            else{
+                sum -= db.get().get(a).getItemPrice();
+                notPurchases += db.get().get(a).getItemName()+" | "+db.get().get(a).getItemPrice()
+                        +" | "+db.get().get(a).getItemQty()+"\n";
             }
         }
 
-        //Initialize Alert Message Variable
         Alert alert = null;
-
-        //Initialize Regex Variable
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
-
-        //Confirm if budget is zero
         if (budgetAmount < 0) {
             errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
-            alert.setContentText(errorMessage);
+            alert.setContentText(errorMessage+"\n\n"+purchases+"\n"+notPurchases);
             alert.showAndWait();
-
-            //Confirm if product total is less than 100 dollars and if total is numeric
-        } else if (productTotal < 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
+            //return errorMessage;
+        }
+        else if (productTotal <= 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
             errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -167,29 +149,26 @@ public class shoppingCartController implements Initializable {
             alert.setHeaderText("Error");
             alert.setContentText(errorMessage);
             alert.showAndWait();
+            //return errorMessage;
         }
-
-        //Confirm budget amount is greater than 0 and productTotal is greater or equal to 100
-        if (budgetAmount > 0 && productTotal >= 100) {
-
+        else{
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Success");
             alert.setHeaderText("Success");
-            alert.setContentText("\n\n" + purchases + "\n" + notPurchases);
+            alert.setContentText(purchases+"\n"+notPurchases);
             alert.showAndWait();
         }
         return null;
     }
 
     public void handlecartCheckout(ActionEvent event) throws IOException {
-        //evaluates budget and checks to see if what you can purchase
+        //TODO calculates budget and checks to see if what you can purchase
         String result = completedCart();
 
         System.out.println("Displaying information to console: Checkout Button Selected");
     }
-
-    //Changes scene to addItems.java
+    //Changes to AddScene
     public void handleitemAddition(ActionEvent event) throws IOException {
 
         Parent addItem_page = FXMLLoader.load(getClass().getResource("addItems.fxml"));
@@ -200,23 +179,18 @@ public class shoppingCartController implements Initializable {
         System.out.println("Displaying information to console: Add Item Button Selected");
     }
 
-    //Deletes all-items after something is selected in table
+    //Deletes items
     public void handleitemDelete(ActionEvent event) throws IOException {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            // Remove all items in the table
-            products.removeAll(products);
-            item_Table.getItems().clear();
-            item_Table.refresh();
-
+            db.delete(Integer.parseInt(db.get().get(selectedIndex).getItemID()));
         } else {
-            // Alert when no items are selected when delete button is hit
+            // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Product Selected");
             alert.setContentText("Please select an item from the table.");
-
             alert.showAndWait();
         }
 

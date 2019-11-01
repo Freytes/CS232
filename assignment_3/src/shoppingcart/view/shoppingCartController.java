@@ -24,29 +24,20 @@ import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
 
-
     //Table used for Shopping Cart
-    @FXML
-    public TableView<Products> item_Table;
-    @FXML
-    public TableColumn<Products, String> item_Priority;
-    @FXML
-    public TableColumn<Products, String> item_Name;
-    @FXML
-    public TableColumn<Products, Number> item_Qty;
-    @FXML
-    public TableColumn<Products, Number> item_Price;
-    @FXML
-    public TextField productGrandtotal = new TextField();
-    @FXML
-    public TextField cartBudget = new TextField();
+    @FXML private TableView<Products> item_Table;
+    @FXML private TableColumn<Products, String> item_Priority;
+    @FXML private TableColumn<Products, String> item_Name;
+    @FXML private TableColumn<Products, Number> item_Qty;
+    @FXML private TableColumn<Products, Number> item_Price;
+    @FXML private TextField productGrandtotal = new TextField();
+    @FXML private TextField cartBudget = new TextField();
 
     //References Main Application to Obtain Table
     private Main mainApp;
 
     // The data placed in an ObservableList
     public static ObservableList<Products> products = FXCollections.observableArrayList();
-
 
     @Override
     //When the program initializes it checks performs the following: set headers, adds new items
