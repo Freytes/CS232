@@ -30,7 +30,7 @@ public class DBConnector {
         }
     }
 
-    public void insert(int priority, String name, int quantity, double price) {
+    public boolean insert(int priority, String name, int quantity, double price) {
         Connection c = null;
         PreparedStatement stmt = null;
 
@@ -50,10 +50,10 @@ public class DBConnector {
             stmt.close();
             c.commit();
             c.close();
-            System.out.println("Added!!!");
+            return true;
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+            return false;
         }
     }
 

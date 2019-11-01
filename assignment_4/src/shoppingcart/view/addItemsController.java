@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import shoppingcart.model.Products;
 
@@ -53,22 +54,30 @@ public class addItemsController extends shoppingCartController {
         shoppingCartController controller = loader.getController();
 
         if (isInputValid()) {
-
             int priority = Integer.parseInt(productPriority.getValue());
             String name = productName.getText();
             double price = Double.parseDouble(productPrice.getText());
             int quantity = Integer.parseInt(productQty.getText());
 
-                db.insert(priority, name, quantity, price);
-                //products.add(p);
-                productPriority.getItems().remove(productPriority.getValue());
+            boolean added = db.insert(priority, name, quantity, price);
+            if(!added){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error");
+                alert.setContentText("Duplicate Item Name Entered");
+                alert.showAndWait();
+            }
 
-                controller.loadData(db.get());
+            productPriority.getItems().remove(productPriority.getValue());
 
-                // Clear values
-                productPriority.getSelectionModel().clearSelection();
-                productName.clear();
-                productPrice.clear();
+
+            controller.loadData(db.get());
+
+            // Clear values
+            productPriority.getSelectionModel().clearSelection();
+            productName.clear();
+            productPrice.clear();
         }
         System.out.println("Displaying information to consoles: Ensuring the addItem method worked as expected.");
     }

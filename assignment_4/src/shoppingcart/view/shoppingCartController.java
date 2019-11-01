@@ -86,7 +86,14 @@ public class shoppingCartController implements Initializable {
     }
 
     public double getBudget() {
-        return Double.parseDouble(cartBudget.getText());
+        double budget;
+        if(cartBudget.getText().equals("")){
+            budget = 0;
+        }
+        else{
+            budget = Double.parseDouble(cartBudget.getText());
+        }
+        return budget;
     }
     public String completedCart() {
         String errorMessage = "";
@@ -94,50 +101,49 @@ public class shoppingCartController implements Initializable {
         String notPurchases = "Items could not be purchased:\n";
         double budgetAmount = getBudget();
         double productTotal = getPriceSum();
-        double sum = 0;
-        for (int a = 0; a < db.get().size(); a++) {
-            sum += db.get().get(a).getItemPrice();
-            int q = db.get().get(a).getItemQty()-1;
-            int Q = 1;
-            System.out.println("Quantity: "+q);
-            while(true){
-                System.out.println("SUM: "+sum);
-                if(sum+db.get().get(a).getItemPrice() <= budgetAmount && q != 0){
-                    sum += db.get().get(a).getItemPrice();
-                    Q++;
+        if(budgetAmount > 0) {
+            double sum = 0;
+            for (int a = 0; a < db.get().size(); a++) {
+                sum += db.get().get(a).getItemPrice();
+                int q = db.get().get(a).getItemQty() - 1;
+                int Q = 1;
+                System.out.println("Quantity: " + q);
+                while (true) {
+                    System.out.println("SUM: " + sum);
+                    if (sum + db.get().get(a).getItemPrice() <= budgetAmount && q != 0) {
+                        sum += db.get().get(a).getItemPrice();
+                        Q++;
+                    } else if (sum == budgetAmount) {
+                        break;
+                    } else
+                        break;
+                    if (q == 0) {
+                        break;
+                    }
+                    q--;
                 }
-                else if(sum == budgetAmount){
-                    break;
+                System.out.println("Sum Now: " + sum);
+                if (sum <= budgetAmount) {
+                    System.out.println("Purchased...");
+                    purchases += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+                            + " | " + Q + "\n";
+                } else {
+                    sum -= db.get().get(a).getItemPrice();
+                    notPurchases += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+                            + " | " + db.get().get(a).getItemQty() + "\n";
                 }
-                else
-                    break;
-                if(q == 0){
-                    break;
-                }
-                q--;
-            }
-            System.out.println("Sum Now: "+sum);
-            if(sum <= budgetAmount){
-                System.out.println("Purchased...");
-                purchases += db.get().get(a).getItemName()+" | "+db.get().get(a).getItemPrice()
-                        +" | "+Q+"\n";
-            }
-            else{
-                sum -= db.get().get(a).getItemPrice();
-                notPurchases += db.get().get(a).getItemName()+" | "+db.get().get(a).getItemPrice()
-                        +" | "+db.get().get(a).getItemQty()+"\n";
             }
         }
 
         Alert alert = null;
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
-        if (budgetAmount < 0) {
+        if (budgetAmount <= 0) {
             errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Error");
             alert.setHeaderText("Error");
-            alert.setContentText(errorMessage+"\n\n"+purchases+"\n"+notPurchases);
+            alert.setContentText(errorMessage);
             alert.showAndWait();
             //return errorMessage;
         }
