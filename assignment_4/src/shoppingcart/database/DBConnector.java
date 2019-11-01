@@ -38,7 +38,6 @@ public class DBConnector {
             }
         }
 
-
         Connection c = null;
         PreparedStatement stmt = null;
 

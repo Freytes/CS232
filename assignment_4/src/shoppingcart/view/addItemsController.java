@@ -25,7 +25,6 @@ public class addItemsController extends shoppingCartController {
     // Priority Choice Values
     private ArrayList<String> priorityChoice = new ArrayList<>();
 
-
     // Fields used to add items to cart//
     @FXML
     private TextField productName = new TextField();
@@ -38,7 +37,7 @@ public class addItemsController extends shoppingCartController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        for (int a = 0; a < 7; a++) {
+        for (int a = 0; a < 10; a++) {
             productPriority.getItems().add((a+1)+"");
         }
     }
@@ -67,7 +66,6 @@ public class addItemsController extends shoppingCartController {
             }
 
             productPriority.getItems().remove(productPriority.getValue());
-
 
             controller.loadData(db.get());
 

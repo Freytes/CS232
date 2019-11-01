@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
 
-
     //Table used for Shopping Cart
     @FXML
     public TableView<Products> item_Table;
@@ -57,7 +56,6 @@ public class shoppingCartController implements Initializable {
         // Calculates the sum of all the items price.
         getPriceSum();
     }
-
     // setColumns header information
     public void setColumns() {
         item_ID.setCellValueFactory(cellData -> cellData.getValue().itemIDProperty());
@@ -65,7 +63,6 @@ public class shoppingCartController implements Initializable {
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
-
     }
 
     //Sets arraylist and adds items//
@@ -97,10 +94,15 @@ public class shoppingCartController implements Initializable {
     }
     public String completedCart() {
         String errorMessage = "";
+
         String purchases = "Purchased:\n";
+
         String notPurchases = "Items could not be purchased:\n";
+
         double budgetAmount = getBudget();
+
         double productTotal = getPriceSum();
+
         if(budgetAmount > 0) {
             double sum = 0;
             for (int a = 0; a < db.get().size(); a++) {
@@ -169,8 +171,8 @@ public class shoppingCartController implements Initializable {
     }
 
     public void handlecartCheckout(ActionEvent event) throws IOException {
-        //TODO calculates budget and checks to see if what you can purchase
-        String result = completedCart();
+
+        completedCart();
 
         System.out.println("Displaying information to console: Checkout Button Selected");
     }
