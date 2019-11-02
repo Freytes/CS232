@@ -49,13 +49,24 @@ public class addItemsController extends shoppingCartController {
         Scene shoppingCart_scene = new Scene(loader.load());
         shoppingCartController controller = loader.getController();
 
+        //First confirms if the input was valid, then adds it to the database.
         if (isInputValid()) {
+            //Captures, then parses priority value to string
             int priority = Integer.parseInt(productPriority.getValue());
+
+            //Captures productName from textfield
             String name = productName.getText();
+
+            //Captures, then parses productPrice value to string
             double price = Double.parseDouble(productPrice.getText());
+
+            //Captures, then parses productQty value to string
             int quantity = Integer.parseInt(productQty.getText());
 
+            //Confirms first if parsed values were added to database
             boolean added = db.insert(priority, name, quantity, price);
+
+            //Parsed values failed due to duplicate items existing within the database.
             if(added == false){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -65,12 +76,12 @@ public class addItemsController extends shoppingCartController {
                 alert.showAndWait();
             }
 
-            productPriority.getItems().remove(productPriority.getValue());
-
+            //Initializes connection to database, and adds items to ITEMS table
             controller.loadData(db.get());
 
             // Clear values
             productPriority.getSelectionModel().clearSelection();
+            productQty.clear();
             productName.clear();
             productPrice.clear();
         }
@@ -79,6 +90,7 @@ public class addItemsController extends shoppingCartController {
 
     public void handleitemReturnCart(ActionEvent event) throws IOException {
 
+        //Returns user back to shoppingCart.
         Parent shoppingCart_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
         Scene shoppingCart_scene = new Scene(shoppingCart_page);
         Stage shoppingCart_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -88,6 +100,7 @@ public class addItemsController extends shoppingCartController {
         System.out.println("Displaying information to console: Ensuring that user returned to main page");
     }
 
+    //Input Validation
     public boolean isInputValid() {
         String errorMessage = "";
 

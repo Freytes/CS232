@@ -72,6 +72,7 @@ public class shoppingCartController implements Initializable {
     }
 
     public double getPriceSum() {
+
         double sum = 0;
 
         for (Products products : item_Table.getItems()) {
@@ -83,55 +84,86 @@ public class shoppingCartController implements Initializable {
     }
 
     public double getBudget() {
+
         double budget;
+
         if(cartBudget.getText().equals("")){
+
             budget = 0;
-        }
-        else{
+
+        } else{
+
             budget = Double.parseDouble(cartBudget.getText());
         }
+
         return budget;
     }
+
     public String completedCart() {
         String errorMessage = "";
 
-        String purchases = "Purchased:\n";
+        String purchased = "Purchased:\n";
 
-        String notPurchases = "Items could not be purchased:\n";
+        String notPurchased = "Items could not be purchased:\n";
 
         double budgetAmount = getBudget();
 
         double productTotal = getPriceSum();
 
         if(budgetAmount > 0) {
+
             double sum = 0;
+
             for (int a = 0; a < db.get().size(); a++) {
+
                 sum += db.get().get(a).getItemPrice();
+
                 int q = db.get().get(a).getItemQty() - 1;
+
                 int Q = 1;
+
                 System.out.println("Quantity: " + q);
+
                 while (true) {
+
                     System.out.println("SUM: " + sum);
+
                     if (sum + db.get().get(a).getItemPrice() <= budgetAmount && q != 0) {
+
                         sum += db.get().get(a).getItemPrice();
+
                         Q++;
+
                     } else if (sum == budgetAmount) {
+
                         break;
+
                     } else
+
                         break;
+
                     if (q == 0) {
+
                         break;
                     }
                     q--;
                 }
+
                 System.out.println("Sum Now: " + sum);
+
                 if (sum <= budgetAmount) {
+
                     System.out.println("Purchased...");
-                    purchases += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+
+                    purchased += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+
                             + " | " + Q + "\n";
                 } else {
+
                     sum -= db.get().get(a).getItemPrice();
-                    notPurchases += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+
+                    notPurchased += db.get().get(a).getItemName() + " | " + db.get().get(a).getItemPrice()
+
                             + " | " + db.get().get(a).getItemQty() + "\n";
                 }
             }
@@ -164,7 +196,7 @@ public class shoppingCartController implements Initializable {
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Success");
             alert.setHeaderText("Success");
-            alert.setContentText(purchases+"\n"+notPurchases);
+            alert.setContentText(purchased+"\n"+notPurchased);
             alert.showAndWait();
         }
         return null;
@@ -184,6 +216,7 @@ public class shoppingCartController implements Initializable {
         Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         addItem_stage.setScene(addItem_scene);
         addItem_stage.show();
+
         System.out.println("Displaying information to console: Add Item Button Selected");
     }
 
@@ -191,14 +224,21 @@ public class shoppingCartController implements Initializable {
     public void handleitemDelete(ActionEvent event) throws IOException {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
+
         if (selectedIndex >= 0) {
+
             db.delete(Integer.parseInt(db.get().get(selectedIndex).getItemID()));
+
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
+
             alert.setTitle("No Selection");
+
             alert.setHeaderText("No Product Selected");
+
             alert.setContentText("Please select an item from the table.");
+
             alert.showAndWait();
         }
 

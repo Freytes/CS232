@@ -39,11 +39,6 @@ public class Main extends Application {
         }
     }
 
-    // Returns the Main Stage
-    public Stage getPrimaryStage() {
-        return mainWindow;
-    }
-
     public static void main(String[] args) {
         launch(args);
     }

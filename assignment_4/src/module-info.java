@@ -3,6 +3,7 @@ module assignment_4 {
     requires javafx.controls;
     requires javafx.swing;
     requires java.sql;
+    requires sqlite.jdbc;
 
     opens shoppingcart;
     opens shoppingcart.model;

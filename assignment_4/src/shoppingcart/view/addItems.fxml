@@ -22,7 +22,7 @@
                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Text id="" fx:id="labelitemName" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:"
               GridPane.rowIndex="1"/>
-        <TextField id="" fx:id="productQty" prefWidth="-1.0" text="1" visible="true"
+        <TextField id="" fx:id="productQty" prefWidth="-1.0" promptText="Please Enter Item Quantity" visible="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Text id="" fx:id="labelitemQty" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Qty:" GridPane.rowIndex="2"/>
         <Text id="" fx:id="labelitemPrice" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Price:"
