@@ -172,8 +172,6 @@ public class shoppingCartController implements Initializable {
         Alert alert = null;
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
 
-
-
         if (budgetAmount <= 0 || !cartBudget.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
             errorMessage += "Not a valid Budget or the budget must be greater than 0!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
