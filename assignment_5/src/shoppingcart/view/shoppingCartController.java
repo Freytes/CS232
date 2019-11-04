@@ -37,26 +37,28 @@ public class shoppingCartController implements Initializable {
     public TextField productGrandtotal = new TextField();
     @FXML
     public TextField cartBudget = new TextField();
-
     @FXML
-    public Label lbusername;
+    public Label lbusername = new Label();
 
     //Database instance
     public static DBConnector db = new DBConnector();
 
     @Override
-    //When the program intializes it checks performs the following: set headers, adds new items
+    //When the program initializes it checks performs the following: set headers, adds new items
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //connect to database
         db.connect();
-
         //sets the column headers
         setColumns();
         // loads data into the Observable List
         loadData(db.get());
         // Calculates the sum of all the items price.
         getPriceSum();
+        //Retrieves logged-in username
+        getUser();
+
     }
+
     // setColumns header information
     public void setColumns() {
         item_ID.setCellValueFactory(cellData -> cellData.getValue().itemIDProperty());
@@ -64,8 +66,12 @@ public class shoppingCartController implements Initializable {
         item_Name.setCellValueFactory(cellData -> cellData.getValue().itemNameProperty());
         item_Qty.setCellValueFactory(cellData -> cellData.getValue().itemQtyProperty());
         item_Price.setCellValueFactory(cellData -> cellData.getValue().itemPriceProperty());
+
     }
 
+    public void getUser(){
+        lbusername.setText(UserLogin.uname);
+    }
     //Sets arraylist and adds items//
     public void loadData(ObservableList<Products> products) {
         item_Table.refresh();
@@ -252,5 +258,13 @@ public class shoppingCartController implements Initializable {
         shoppingCart_stage.show();
 
         System.out.println("Displaying information to console: Delete Item Button Selected");
+    }
+    public void handlelogout(ActionEvent event) throws IOException {
+        // Logs user out of the system
+        Parent login_page = FXMLLoader.load(getClass().getResource("userLogin.fxml"));
+        Scene login_scene = new Scene(login_page);
+        Stage login_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        login_stage.setScene(login_scene);
+        login_stage.show();
     }
 }

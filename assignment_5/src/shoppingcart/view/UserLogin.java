@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class UserLogin extends shoppingCartController {
 
+
     @FXML
     public TextField username  = new TextField();
 
@@ -30,6 +31,7 @@ public class UserLogin extends shoppingCartController {
     @FXML
     public Button submit = new Button();
 
+    static String uname = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,7 +52,7 @@ public class UserLogin extends shoppingCartController {
             ResultSet rs = null;
 
             //Captures username from textfield
-            String uname = username.getText();
+            uname = username.getText();
 
             //Captures password from textfield
             String upassword = password.getText();
@@ -65,23 +67,29 @@ public class UserLogin extends shoppingCartController {
             rs = ps.executeQuery();
 
             if (rs.next()){
-                Parent addItem_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
+               Parent addItem_page = FXMLLoader.load(getClass().getResource("shoppingcart.fxml"));
                 Scene addItem_scene = new Scene(addItem_page);
                 Stage addItem_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 addItem_stage.setScene(addItem_scene);
                 addItem_stage.show();
 
+                username.clear();
+                password.clear();
+
                 System.out.println("Displaying information to console: Login was successful");
             }
             else{
 
-                String errorMessage = "User"+ " " + uname + " " + "does not exist!";
+                String errorMessage = "User"+ " " + uname + " " + "does not exist, or password is incorrect!";
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Fields");
                 alert.setHeaderText("Please correct invalid fields");
                 alert.setContentText(errorMessage);
                 alert.showAndWait();
+
+                username.clear();
+                password.clear();
             }
 
 
