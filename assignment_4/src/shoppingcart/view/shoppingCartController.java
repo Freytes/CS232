@@ -87,7 +87,7 @@ public class shoppingCartController implements Initializable {
 
         double budget;
 
-        if(cartBudget.getText().equals("")){
+        if(cartBudget.getText().equals("") || !cartBudget.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
 
             budget = 0;
 
@@ -171,8 +171,11 @@ public class shoppingCartController implements Initializable {
 
         Alert alert = null;
         String dollarMatch = "\"\\\\d{0,7}([\\\\.]\\\\d{0,4})?\"";
-        if (budgetAmount <= 0) {
-            errorMessage += "Not a valid Budget, budget must be greater than 0!\n";
+
+
+
+        if (budgetAmount <= 0 || !cartBudget.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")) {
+            errorMessage += "Not a valid Budget or the budget must be greater than 0!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.setTitle("Error");
@@ -180,8 +183,8 @@ public class shoppingCartController implements Initializable {
             alert.setContentText(errorMessage);
             alert.showAndWait();
             //return errorMessage;
-        }
-        else if (productTotal <= 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
+
+        } else if (productTotal <= 100.00 || productGrandtotal.getText().matches((dollarMatch))) {
             errorMessage += "Not a valid total, GrandTotal must be greater than 100!\n";
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);

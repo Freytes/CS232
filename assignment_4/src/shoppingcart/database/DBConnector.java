@@ -27,7 +27,7 @@ public class DBConnector {
 
             //Builds SQL query to create ITEMS table if it doesn't exist.
             String sql = "CREATE TABLE IF NOT EXISTS ITEMS"
-                    + "( ID INT PRIMARY KEY AUTOINCREMENT NOT NULL ,"
+                    + "( ID INTEGER PRIMARY KEY AUTOINCREMENT ,"
                     + " PRIORITY INT NOT NULL,"
                     + " NAME TEXT NOT NULL, "
                     + " QUANTITY INT NOT NULL, "

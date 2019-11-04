@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="750.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shoppingcart.view.shoppingCartController">
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="shoppingcart.view.shoppingCartController">
   <TableView fx:id="item_Table" layoutX="77.0" layoutY="174.0" prefHeight="352.0" prefWidth="646.0" tableMenuButtonVisible="true">
     <columnResizePolicy>
       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
     </columnResizePolicy>
     <columns>
-      <TableColumn fx:id="item_ID" prefWidth="75.0" text="ID" />
-      <TableColumn fx:id="item_Priority" editable="false" prefWidth="75.0" text="Priority">
+      <TableColumn prefWidth="75.0" text="ID" fx:id="item_ID" />
+      <TableColumn editable="false" prefWidth="75.0" text="Priority" fx:id="item_Priority">
         <cellValueFactory>
           <PropertyValueFactory property="itemPriority" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn fx:id="item_Name" editable="false" prefWidth="75.0" text="Item Name">
+      <TableColumn editable="false" prefWidth="75.0" text="Item Name" fx:id="item_Name">
         <cellValueFactory>
           <PropertyValueFactory property="itemName" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn fx:id="item_Qty" editable="false" prefWidth="75.0" text="Item Qty">
+      <TableColumn editable="false" prefWidth="75.0" text="Item Qty" fx:id="item_Qty">
         <cellValueFactory>
           <PropertyValueFactory property="itemQty" />
         </cellValueFactory>
       </TableColumn>
-      <TableColumn fx:id="item_Price" editable="false" prefWidth="75.0" text="Item Price">
+      <TableColumn editable="false" prefWidth="75.0" text="Item Price" fx:id="item_Price">
         <cellValueFactory>
           <PropertyValueFactory property="itemPrice" />
         </cellValueFactory>
@@ -51,7 +55,7 @@
       <TextField fx:id="productGrandtotal" disable="true" editable="false" prefHeight="44.0" prefWidth="294.0" promptText="Total &gt; 100" GridPane.columnIndex="1" GridPane.rowIndex="0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grand Total:" textAlignment="CENTER" wrappingWidth="130.95703125" GridPane.columnIndex="0" GridPane.rowIndex="0">
         <font>
-          <Font size="24.0" />
+          <Font size="24.0" fx:id="x2" />
         </font>
         <GridPane.margin>
           <Insets fx:id="x1" />
@@ -62,14 +66,22 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="134.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="166.0" />
     </columnConstraints>
-    <rowConstraints>
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    </rowConstraints>
     <padding>
       <Insets fx:id="x2" />
     </padding>
+    <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
   </GridPane>
   <GridPane layoutX="78.0" layoutY="537.0" prefHeight="66.0" prefWidth="234.0">
+    <children>
+      <TextField fx:id="cartBudget" prefHeight="42.0" prefWidth="144.0" promptText="Please Enter a Budget" GridPane.columnIndex="1" />
+     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Budget:">
+      <font>
+        <Font size="24.0" fx:id="x2" />
+      </font>
+     </Text>
+    </children>
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="89.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="145.0" />
@@ -77,13 +89,5 @@
     <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <children>
-      <TextField fx:id="cartBudget" prefHeight="42.0" prefWidth="144.0" promptText="Please Enter a Budget" GridPane.columnIndex="1" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Budget:">
-        <font>
-          <Font size="24.0" />
-        </font>
-      </Text>
-    </children>
   </GridPane>
 </AnchorPane>
