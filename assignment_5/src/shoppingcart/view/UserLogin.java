@@ -52,7 +52,7 @@ public class UserLogin extends shoppingCartController {
             ResultSet rs = null;
 
             //Captures username from textfield
-            uname = username.getText();
+            uname = username.getText().toLowerCase();
 
             //Captures password from textfield
             String upassword = password.getText();
