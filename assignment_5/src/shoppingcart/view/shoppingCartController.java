@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import shoppingcart.database.DBConnector;
@@ -41,6 +38,9 @@ public class shoppingCartController implements Initializable {
     @FXML
     public TextField cartBudget = new TextField();
 
+    @FXML
+    public Label lbusername;
+
     //Database instance
     public static DBConnector db = new DBConnector();
 
@@ -49,6 +49,7 @@ public class shoppingCartController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //connect to database
         db.connect();
+
         //sets the column headers
         setColumns();
         // loads data into the Observable List

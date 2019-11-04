@@ -8,6 +8,24 @@ import java.sql.*;
 
 public class DBConnector {
 
+    public Connection getuserConnection() throws ClassNotFoundException, SQLException {
+
+        Connection c = null;
+
+        Statement stmt = null;
+
+        Class.forName("org.sqlite.JDBC");
+
+        try {
+            //Directs DriverManager to the correct SQL database
+            c = DriverManager.getConnection("jdbc:sqlite:src/shoppingcart/database/DB/shoppingcart.db");
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return c;
+    }
+
     //Creates Initial Connection to the USERS database and creates it if it doesn't exist.
     public void userconnect() {
 
