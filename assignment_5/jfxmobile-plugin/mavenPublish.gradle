@@ -29,7 +29,7 @@ uploadPublished {
                 def repositoryPassword = getStringPropertyDefaultAsProperty('repositoryPassword', 'sonatypePassword')
 
                 configurePOM(pom)
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+                beforeDeployment {MavenDeployment deployment -> signing.signPom(deployment) }
                 repository(url: repositoryUrl) {
                     authentication userName: repositoryUsername, password: repositoryPassword
                 }

@@ -1,12 +1,12 @@
-module assignment_4 {
+module assignment_5 {
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.swing;
     requires java.sql;
     requires sqlite.jdbc;
 
-    opens shoppingcart;
-    opens shoppingcart.model;
-    opens shoppingcart.view;
+    opens main.java.shoppingcart;
+    opens main.java.shoppingcart.model;
+    opens main.java.shoppingcart.view;
 
 }

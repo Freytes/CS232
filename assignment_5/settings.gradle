@@ -1,1 +1,2 @@
-include 'ShoppingCartApplicationApp'
+include 'shoppingcart'
+include ':app'
