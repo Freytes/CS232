@@ -1,2 +1,2 @@
-include 'shoppingcart'
-include ':app'
+include 'main.java.shoppingcart'
+

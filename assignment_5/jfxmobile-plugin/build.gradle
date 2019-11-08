@@ -45,6 +45,11 @@ task groovydocJar(type: Jar, dependsOn: groovydoc) {
 artifacts {
     archives sourceJar, groovydocJar
 }
+dependencies {
+    compile(project(':java-common')) {
+        transitive = true
+    }
+}
 
 bintray {
     user = bintrayUser
