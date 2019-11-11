@@ -5,15 +5,15 @@
 
 - GUI interface which leverages JavaFx for a dynamic experience.  
 - Implements a Table which is populated from user input.
-    - Grand total is automatically populated from the 'Price' column.
-    - Budget is fixed at 59.00 usd but can be user defined (feature to be implemented at a later date.) 
-    
+    - Grand total is automatically populated from the 'Price' column multiplied by the quantity.
+    - Budget can be customized via user input.
+      
 - The Shopping Cart Application allows users to add items from a different page.
 - Allows users to enter a Item name value and strips out all non Alphabetic characters.
 
     - The Item name cannot be duplicated and must be unique.
 - Allows user to enter a Item Priority value which is auto-populated [1-10].
-    - Multiple Itme Priority can be used, the shopping cart application generated a unique ID per item in the cart.
+    - Multiple Item Priorities can be used, the shopping cart application generated a unique ID per item in the cart.
     
 - Input verification which removes the following:
      - White Spaces.
@@ -25,7 +25,8 @@
    - This is where the Main method resides.
    
    **DBConnector.java**
-   - This is where the Main method resides.
+   - This is where the database methods reside (CRUD).
+   - This is where the ObservableArrayList is defined.
    
   **ShoppingCartController.java**
    
@@ -34,7 +35,7 @@
      - Add Items
      - Remove Items
      - Checkout 
-   - Grand total is automatically populated based on the prices of the items in the table.
+   - Grand total is automatically populated based on the prices of the items multiplied by the quantity in the table.
    - Budget
      - Cannot be null or zero.
      
@@ -95,9 +96,6 @@
      - Action which occurs when the user hits the add button on the addItemsController.
 17. isInputValid()
      - Logic which occurs after user input to verify if the data is valid.
-
- 
-
     
 ## UML
 ![UML](UML.png)
