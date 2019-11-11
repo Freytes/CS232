@@ -7,5 +7,4 @@ module assignment_5 {
     opens main.java.shoppingcart;
     opens main.java.shoppingcart.model;
     opens main.java.shoppingcart.view;
-
 }
