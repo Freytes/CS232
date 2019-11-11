@@ -34,7 +34,13 @@ public class UserLogin extends shoppingCartController {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //connect to database to create USERS table
-        db.userconnect();
+        try {
+            db.userconnect();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleuserLogin(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {

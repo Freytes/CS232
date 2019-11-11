@@ -27,6 +27,7 @@
    **DBConnector.java**
    - This is where the database methods reside (CRUD).
    - This is where the ObservableArrayList is defined.
+   - Custom SQL exception handling.
    
   **ShoppingCartController.java**
    
@@ -79,36 +80,38 @@
    - Allows login via user input.
 3. Connect()
     - Creates the initial database connection.
-4. Insert()
+4. SQLiteErrorMsg()
+   - Custom SQL error messages.
+5. Insert()
     - Inserts user data into the database.
-5. Get()
+6. Get()
     - Collects all of the items within the Products Observable Item table.
-6. Delete()
+7. Delete()
     - Removes selected items within the database by unique ID.
-7. Products()
+8. Products()
     - Getters and setters for the items in the shopping cart.
-8. setColumns()
+9. setColumns()
     - Sets Table column headers.
-9. loadData()
+10. loadData()
     - Adds Items to arrayList.
-10. getPriceSum()
+11. getPriceSum()
     - Calculates the sum of all items in the table.
-11. getBudget()
+12. getBudget()
     - Calculates a fixed number and sets that information to a TextField.
-12. completedCart()
+13. completedCart()
      - Logic which is used to display which items could be purchased based on budget and priority.
       - The displays information as 'Purchased' and 'Not Purchased'.
-13. handlecartCheckout()
+14. handlecartCheckout()
      - Action which occurs when the user hits the checkout button on the shoppingCartController.
-14. handleitemAddition()
+15. handleitemAddition()
      - Action which occurs when the user hits the add button on the shoppingCartController, this button changes the users scene to addItemsController.
-15. handleitemDelete()
+16. handleitemDelete()
      - Action which occurs when the user hits the delete all button on the shoppingCartController.   
-16. handleitemReturnCart()
+17. handleitemReturnCart()
      - Action which occurs when the user hits the shoppingCart button on the addItemsController.
-17. handleitemAdd()
+18. handleitemAdd()
      - Action which occurs when the user hits the add button on the addItemsController.
-18. isInputValid()
+19. isInputValid()
      - Logic which occurs after user input to verify if the data is valid.
     
 ## UML

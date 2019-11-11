@@ -17,6 +17,7 @@ import main.java.shoppingcart.model.Products;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class shoppingCartController implements Initializable {
@@ -230,7 +231,7 @@ public class shoppingCartController implements Initializable {
     }
 
     //Deletes items
-    public void handleitemDelete(ActionEvent event) throws IOException {
+    public void handleitemDelete(ActionEvent event) throws IOException, SQLException {
 
         int selectedIndex = item_Table.getSelectionModel().getSelectedIndex();
 

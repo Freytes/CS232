@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -42,7 +43,7 @@ public class addItemsController extends shoppingCartController {
         }
     }
 
-    public void handleitemAdd(ActionEvent event) throws IOException {
+    public void handleitemAdd(ActionEvent event) throws IOException, SQLException {
 
         //Used to connect addItems Scene to shoppingCartController Scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("shoppingcart.fxml"));

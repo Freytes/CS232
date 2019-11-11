@@ -1,5 +1,5 @@
 package main.java.shoppingcart.database;
-
+import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import main.java.shoppingcart.model.Products;
@@ -20,14 +20,14 @@ public class DBConnector {
             //Directs DriverManager to the correct SQL database
             c = DriverManager.getConnection("jdbc:sqlite:src/main/java/shoppingcart/database/DB/shoppingcart.db");
 
-        }catch (SQLException e){
-            e.printStackTrace();
+        }catch (SQLiteErrorMsg err){
+            err.printStackTrace();
         }
         return c;
     }
 
     //Creates Initial Connection to the USERS database and creates it if it doesn't exist.
-    public void userconnect() {
+    public void userconnect() throws ClassNotFoundException, SQLException {
 
         Connection c = null;
 
@@ -58,9 +58,9 @@ public class DBConnector {
             //Completes connection
             c.close();
 
-        } catch (Exception e) {
+        } catch (SQLiteErrorMsg err) {
 
-            System.err.println(e.getMessage());
+            System.err.println(err.getMessage());
 
             System.exit(0);
         }
@@ -101,16 +101,20 @@ public class DBConnector {
             //Completes connection
             c.close();
 
-        } catch (Exception e) {
+        } catch (SQLiteErrorMsg err) {
 
-            System.err.println(e.getMessage());
+            System.err.println(err.getMessage());
 
             System.exit(0);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     //Inserts priority, name, quantity and price into database.
-    public boolean insert(int priority, String name, int quantity, double price) {
+    public boolean insert(int priority, String name, int quantity, double price) throws SQLException {
 
         //Requests the items from the Products ObservableList
         ObservableList<Products> productsList = get();
@@ -161,9 +165,9 @@ public class DBConnector {
 
             return true;
 
-        } catch (Exception e) {
+        } catch (SQLiteErrorMsg | ClassNotFoundException err) {
 
-            System.err.println(e.getMessage());
+            System.err.println(err.getMessage());
 
             return false;
         }
@@ -225,11 +229,13 @@ public class DBConnector {
             //Closes SQL connection
             c.close();
 
-        } catch (Exception e) {
+        } catch (SQLiteErrorMsg err) {
 
-            System.err.println(e.getMessage());
+            System.err.println(err.getMessage());
 
             System.exit(0);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
         }
 
         // Bubble sorting the items within the Table by itemPriority
@@ -247,7 +253,7 @@ public class DBConnector {
     }
 
 
-    public void delete(int ID) {
+    public void delete(int ID) throws SQLException {
 
         Connection c = null;
 
@@ -283,11 +289,16 @@ public class DBConnector {
             //Closes query connection
             c.close();
 
-        } catch (Exception e) {
+        } catch (SQLiteErrorMsg | ClassNotFoundException err) {
 
-            System.err.println(e.getMessage());
+            System.err.println(err.getMessage());
 
             System.exit(0);
+        }
+    }
+    public class SQLiteErrorMsg extends SQLException {
+        public SQLiteErrorMsg (String errorMessage, Throwable err) {
+            super(errorMessage, err);
         }
     }
 }
