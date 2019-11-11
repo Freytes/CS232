@@ -38,7 +38,19 @@
    - Grand total is automatically populated based on the prices of the items multiplied by the quantity in the table.
    - Budget
      - Cannot be null or zero.
-     
+  
+  **UserLogin.java** 
+  
+  - Displays user login information
+  - Allows user to add the following information:
+    - Username
+    - Password
+  - User validation is performed to ensure:
+    - Username exists.
+    - User name does not contain numbers.
+    - Password is correct.
+  - User information is retrieved via a table in a database called USERS.
+  
   **AddItemsController.java**
    - Allows the user to add a new item based on the following:
       - Priority
@@ -62,39 +74,41 @@
 ## Pseudo Code 
 
 1. Main()
-     - Display the initial Scene.
-2. Connect()
+   - Display the initial Scene.
+2. Login()
+   - Allows login via user input.
+3. Connect()
     - Creates the initial database connection.
-3. Insert()
+4. Insert()
     - Inserts user data into the database.
-4. Get()
+5. Get()
     - Collects all of the items within the Products Observable Item table.
-5. Delete()
+6. Delete()
     - Removes selected items within the database by unique ID.
-6. Products()
+7. Products()
     - Getters and setters for the items in the shopping cart.
-7. setColumns()
+8. setColumns()
     - Sets Table column headers.
-8. loadData()
+9. loadData()
     - Adds Items to arrayList.
-9. getPriceSum()
+10. getPriceSum()
     - Calculates the sum of all items in the table.
-10. getBudget()
+11. getBudget()
     - Calculates a fixed number and sets that information to a TextField.
-11. completedCart()
+12. completedCart()
      - Logic which is used to display which items could be purchased based on budget and priority.
       - The displays information as 'Purchased' and 'Not Purchased'.
-12. handlecartCheckout()
+13. handlecartCheckout()
      - Action which occurs when the user hits the checkout button on the shoppingCartController.
-13. handleitemAddition()
+14. handleitemAddition()
      - Action which occurs when the user hits the add button on the shoppingCartController, this button changes the users scene to addItemsController.
-14. handleitemDelete()
+15. handleitemDelete()
      - Action which occurs when the user hits the delete all button on the shoppingCartController.   
-15. handleitemReturnCart()
+16. handleitemReturnCart()
      - Action which occurs when the user hits the shoppingCart button on the addItemsController.
-16. handleitemAdd()
+17. handleitemAdd()
      - Action which occurs when the user hits the add button on the addItemsController.
-17. isInputValid()
+18. isInputValid()
      - Logic which occurs after user input to verify if the data is valid.
     
 ## UML
