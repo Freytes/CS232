@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/assignment_6.iml" filepath="$PROJECT_DIR$/assignment_6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.android.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.desktop.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.desktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.embedded.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.embedded.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.ios.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.main.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/main.java.shoppingcart/assignment_6.main.java.shoppingcart.iml" filepath="$PROJECT_DIR$/.idea/modules/main.java.shoppingcart/assignment_6.main.java.shoppingcart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/assignment_6.test.iml" filepath="$PROJECT_DIR$/.idea/modules/assignment_6.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jfxmobile-plugin/src/main/resources/ios/ios.iml" filepath="$PROJECT_DIR$/jfxmobile-plugin/src/main/resources/ios/ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jfxmobile-plugin/src/main/main.iml" filepath="$PROJECT_DIR$/jfxmobile-plugin/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jfxmobile-plugin/src/test/test.iml" filepath="$PROJECT_DIR$/jfxmobile-plugin/src/test/test.iml" />
+    </modules>
+  </component>
+</project>

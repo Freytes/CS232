@@ -1,0 +1,72 @@
+buildscript {
+	repositories {
+		google()
+		jcenter()
+		maven {
+			url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
+		}
+		maven {
+			url 'https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc'
+		}
+		maven {
+			url "https://maven.google.com"
+		}
+	}
+	dependencies {
+		classpath 'org.javafxports:jfxmobile-plugin:2.0.30'
+		classpath group: 'org.xerial', name: 'sqlite-jdbc', version: '3.27.2'
+		classpath 'org.xerial:sqlite-jdbc:3.27.2.1'
+
+	}
+}
+
+apply plugin: 'org.javafxports.jfxmobile'
+
+repositories {
+	jcenter()
+	maven {
+		url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
+	}
+}
+sourceSets.main.java.srcDirs = ['src']
+mainClassName = 'main.java.shoppingcart'
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+
+dependencies {
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.27.2'
+	compile 'org.xerial:sqlite-jdbc:3.27.2'
+	compile 'com.gluonhq:charm:5.0.0-jdk9'
+	androidRuntime 'com.gluonhq:charm:5.0.2'
+	// https://mvnrepository.com/artifact/com.android.support/appcompat-v7
+	compile group: 'com.android.support', name: 'appcompat-v7', version: '27.0.0'
+	compile 'com.android.support:appcompat-v7:27.0.0'
+	// https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+	compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+	compile 'org.xerial:sqlite-jdbc:3.27.2.1'
+}
+
+jfxmobile {
+	javafxportsVersion = "8.60.12"
+	downConfig {
+		version = '3.8.6'
+		// Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
+		plugins 'display', 'lifecycle', 'statusbar', 'storage'
+	}
+	android {
+		buildToolsVersion '27.0.0'
+		manifest = 'src/android/AndroidManifest.xml'
+
+	}
+	ios {
+		infoPList = file('src/ios/Default-Info.plist')
+		forceLinkClasses = [
+				'com.gluonhq.**.*',
+				'javax.annotations.**.*',
+				'javax.inject.**.*',
+				'javax.json.**.*',
+				'org.glassfish.json.**.*'
+		]
+	}
+}

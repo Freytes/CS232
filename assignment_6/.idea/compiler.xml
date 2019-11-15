@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="assignment_6.android" target="1.9" />
+      <module name="assignment_6.desktop" target="1.9" />
+      <module name="assignment_6.embedded" target="1.9" />
+      <module name="assignment_6.ios" target="1.9" />
+      <module name="assignment_6.main" target="1.9" />
+      <module name="assignment_6.test" target="1.9" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

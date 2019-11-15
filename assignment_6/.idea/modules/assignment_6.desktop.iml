@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="assignment_6:desktop" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_9">
+    <output url="file://$MODULE_DIR$/../../build/classes/java/desktop" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../src/desktop" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="assignment_6.main" />
+    <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.28.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm:5.0.0-jdk9" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:appcompat-v7:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-glisten-connect-view:5.0.0-jdk9" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-glisten:5.0.0-jdk9" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-display:3.8.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.gluonhq:charm-down-plugin-display-desktop:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-lifecycle:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-statusbar:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-cloudlink-client:4.4.2-jdk9" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-storage:3.8.6" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.gluonhq:charm-down-plugin-lifecycle-desktop:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:connect:1.4.4" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-fragment:aar:27.0.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.gluonhq:charm-down-plugin-storage-desktop:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-utils:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:animated-vector-drawable:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-core-ui:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-compat:aar:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-device:3.7.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-in-app-billing:3.7.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-push-notifications:3.7.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-plugin-runtime-args:3.7.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.gluonhq:charm-down-core:3.8.6" level="project" />
+    <orderEntry type="library" name="Gradle: org.glassfish:javax.json:1.0.4" level="project" />
+    <orderEntry type="library" name="Gradle: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime:aar:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: android.arch.core:common:1.0.0" level="project" />
+  </component>
+</module>
